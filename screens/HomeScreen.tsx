@@ -1,25 +1,59 @@
-import { StyleSheet, FlatList, View } from 'react-native';
+import { StyleSheet, FlatList, Text, View } from 'react-native';
 import Title from '../components/shared/Title';
 import SearchButton from '../components/search/SearchButton';
 import Subtitle from '../components/shared/Subtitle';
-import WorkoutCard from '../components/workout/WorkoutCard';
 import WorkoutCarousel from '../components/workout/WorkoutCarousel';
 import ProgramCard from '../components/program/ProgramCard';
+import { useState } from 'react';
+import PrimaryButton from '../components/shared/PrimaryButton';
 
 export default function HomeScreen() {
   const title = "Workout";
   const subtitle = "Suit tes progrès";
 
+
+  // #region Workouts
   const myWorkouts= "Mes séances";
-  const myProgram= "Reprendre le programme";
+
+  //TODO : add workout data in userWorkouts
+  const userWorkouts = [];
+  const [hasWorkouts, setHasWorkouts] = useState(true); // default to false when linked to db
+
+  if (userWorkouts.length > 0) {
+    setHasWorkouts(true);
+  }
+
+  function createWorkout() {
+    // TODO: navigate to workout creation
+  }
 
   function goToWorkout() {
     // TODO: navigate to workout recap
   }
 
+  // #endregion Workouts
+
+
+
+  // #region Program
+  const myProgram= "Reprendre le programme";
+  const [hasProgram, setHasProgram] = useState(true); // default to false when linked to db
+
+  const userProgram = [];
+
+  if (userWorkouts.length > 0) {
+    setHasProgram(true);
+  }
+
+
   function goToProgram() {
     // TODO: navigate to program
   }
+
+  function addProgram() {
+    // TODO: navigate to programs list
+  }
+  // #endregion Program
 
 
   return (
@@ -32,13 +66,16 @@ export default function HomeScreen() {
           <Subtitle text={myWorkouts}/>
           <SearchButton />
         </View>
-        {/* <View style={styles.carousel}>
-          <WorkoutCard onPress={goToWorkout} date='12 mai' title='Nom de la séance' />
-          <WorkoutCard onPress={goToWorkout} date='12 mai' title='Nom de la séance' />
-          <WorkoutCard onPress={goToWorkout} date='12 mai' title='Nom de la séance' />
-          <WorkoutCard onPress={goToWorkout} date='12 mai' title='Nom de la séance' />
-        </View> */}
-        <WorkoutCarousel/>
+        {hasWorkouts ? (
+          <WorkoutCarousel/>)
+          : (
+            <View style={styles.noWorkoutArea}>
+              <Text> Vous n'avez pas encore fait de séance.</Text>
+              <PrimaryButton onPress={createWorkout} title='Commencer une séance' style={styles.buttonAdd} />
+            </View>
+          )
+        }
+        
       </View>
       {/* #endregion User's lasts workouts */}
 
@@ -48,7 +85,15 @@ export default function HomeScreen() {
           <Subtitle text={myProgram}/>
           <SearchButton />
         </View>
-        <ProgramCard onPress={goToProgram} title='Nom du programme' objective='Perte de poids' workoutName='Haut du corps' />
+        {hasProgram ? (
+          <ProgramCard onPress={goToProgram} title='Nom du programme' objective='Perte de poids' workoutName='Haut du corps' />)
+          : (
+            <View style={styles.noWorkoutArea}>
+              <PrimaryButton onPress={addProgram} title='Commencer un programme' style={styles.buttonAdd} />
+            </View>
+          )
+        }
+        
       </View>
       {/* #endregion User's program */}
 
@@ -70,7 +115,12 @@ export default function HomeScreen() {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      alignContent: "center",
+    },
+    noWorkoutArea: {
+      alignItems: "center",
+    },
+    buttonAdd: {
+      marginTop: 10,
     }
   });
   

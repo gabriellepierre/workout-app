@@ -26,6 +26,7 @@ const SearchButton: React.FC<SearchButtonProps> = ({ style }) => {
 
 const styles = StyleSheet.create({
   button: {
+    padding: 10,
     width: 40,
     alignItems: "center",
   },

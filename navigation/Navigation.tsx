@@ -38,7 +38,7 @@ export default function Navigation() {
                 name="Account" 
                 component={AccountScreen}
                 options={{
-                    // title: 'Account',
+                    title: '',
                     headerShown: false,
                     tabBarIcon: ({color}) => <TabBarIcon 
                     name="user" color={color}/>,

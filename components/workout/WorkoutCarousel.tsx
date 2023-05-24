@@ -1,15 +1,32 @@
 import React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import WorkoutCard from './WorkoutCard';
+import PrimaryButton from '../shared/PrimaryButton';
 
 const carouselData = [
-    { id: 1, title: 'Élément 1' },
-    { id: 2, title: 'Élément 2' },
-    { id: 3, title: 'Élément 3' },
+    { id: 1, title: 'Nom de la séance', date: '12 mai' },
+    { id: 2, title: 'Nom de la 2eme séance', date: '10 mai' },
+    { id: 3, title: 'Nom de la 3eme séance', date: '3 mai' },
+    { id: 4, title: 'Nom de la 3eme séance', date: '1 avril' },
     // TODO Ajoutez les autres éléments de votre carrousel
   ];
+
+  // TODO : Ajouter le type Workout et faire passer la data en callback
+// type WorkoutData = Workout[];
   
- const WorkoutCarousel: React.FC = () => {
+const MAX_TITLE_LENGTH = 13; // longueur maximale du titre
+
+ const WorkoutCarousel: React.FC = (
+  // carouselData: WorkoutData
+  ) => {
+
+  function truncatedTitle(title: string) {
+    const truncatedTitle = title.length > MAX_TITLE_LENGTH
+    ? title.slice(0, MAX_TITLE_LENGTH) + '...'
+    : title;
+
+    return truncatedTitle;
+  }
 
     function goToWorkout() {
         // TODO: navigate to workout recap
@@ -24,7 +41,7 @@ const carouselData = [
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <View style={styles.item}>
-                <WorkoutCard onPress={goToWorkout} date='12 mai' title='Nom de la séance' />
+                <WorkoutCard onPress={goToWorkout} date={item.date} title={truncatedTitle(item.title)} />
               {/* TODO Affichez le contenu de chaque élément ici */}
             </View>
           )}

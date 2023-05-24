@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontSize: 15,
     color: "white",
+    fontWeight: "bold",
   },
   objective: {
     fontSize: 10,

@@ -11,7 +11,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ onPress, title, date }) => {
 
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={[styles.title, styles.truncate]}>{title}</Text>
       <Text style={styles.date}>Du {date}</Text>
     </TouchableOpacity>
   );
@@ -29,6 +29,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "white",
     textTransform: "uppercase",
+    // display: "inline-flex",
+    
+  },
+  truncate: {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   },
   date: {
     marginVertical: 20,
