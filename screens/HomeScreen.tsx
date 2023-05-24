@@ -4,6 +4,7 @@ import SearchButton from '../components/search/SearchButton';
 import Subtitle from '../components/shared/Subtitle';
 import WorkoutCard from '../components/workout/WorkoutCard';
 import WorkoutCarousel from '../components/workout/WorkoutCarousel';
+import ProgramCard from '../components/program/ProgramCard';
 
 export default function HomeScreen() {
   const title = "Workout";
@@ -14,6 +15,10 @@ export default function HomeScreen() {
 
   function goToWorkout() {
     // TODO: navigate to workout recap
+  }
+
+  function goToProgram() {
+    // TODO: navigate to program
   }
 
 
@@ -43,6 +48,7 @@ export default function HomeScreen() {
           <Subtitle text={myProgram}/>
           <SearchButton />
         </View>
+        <ProgramCard onPress={goToProgram} title='Nom du programme' objective='Perte de poids' workoutName='Haut du corps' />
       </View>
       {/* #endregion User's program */}
 
@@ -64,13 +70,6 @@ export default function HomeScreen() {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      alignContent: "center",
-    },
-    carousel: {
-      marginTop: 10,
-      display: "flex",
-      flexDirection: "row",
-      rowGap: 10,
       alignContent: "center",
     }
   });

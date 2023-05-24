@@ -6,28 +6,18 @@ interface ProgramCardProps {
   title: string;
   objective: string;
   workoutName: string;
-  color?: string;
-  style?: ViewStyle;
-  textStyle?: TextStyle;
 }
 
-const ProgramCard: React.FC<ProgramCardProps> = ({ onPress, title, objective, workoutName, color, style, textStyle }) => {
-  const cardStyles = [styles.card, style];
-  if (color) {
-    cardStyles.push({ backgroundColor: color });
-  } else {
-    cardStyles.push({ backgroundColor: "#565656" });
-  }
-
+const ProgramCard: React.FC<ProgramCardProps> = ({ onPress, title, objective, workoutName}) => {
   return (
-    <TouchableOpacity style={cardStyles} onPress={onPress}>
-        <View>
-            <Text style={[styles.title, textStyle]}>{title}</Text>
-            <Text style={[styles.date, textStyle]}>- {objective}</Text>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
+        <View style={[styles.flexed, styles.between]}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.objective}>- {objective}</Text>
         </View>
-         <View>
-            <Text>Séance du jour :</Text>
-            <Text style={[styles.title, textStyle]}>{workoutName}</Text>
+         <View style={styles.flexed}>
+            <Text style={styles.workoutTitle}>Séance du jour : </Text>
+            <Text style={styles.workoutName}>{workoutName}</Text>
          </View>
     </TouchableOpacity>
   );
@@ -36,23 +26,40 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ onPress, title, objective, wo
 const styles = StyleSheet.create({
   card: {
     padding: 10,
-    width: "50%",
+    width: "100%%",
     backgroundColor: "#565656",
     borderRadius: 15,
     
   },
+  flexed: {
+    display: "flex",
+    flexDirection: "row",
+    alignContent: "center",
+  },
+  between: {
+      justifyContent: "space-between",
+  },
   title: {
-    marginVertical: 20,
     fontSize: 20,
     color: "white",
     textTransform: "uppercase",
   },
-  date: {
-    marginVertical: 20,
+  workoutTitle: {
+    marginVertical: 10,
     fontSize: 15,
     color: "white",
     textTransform: "uppercase",
+  }, 
+  workoutName: {
+    marginVertical: 10,
+    fontSize: 15,
+    color: "white",
   },
+  objective: {
+    fontSize: 10,
+    color: "white"
+  },
+  
 });
 
 export default ProgramCard;
