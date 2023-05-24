@@ -3,11 +3,14 @@ import HomeScreen from "../screens/HomeScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome } from "@expo/vector-icons";
 import AccountScreen from "../screens/AccountScreen";
-import PlusButton from "../components/PlusButton";
+import PlusButton from "../components/shared/PlusButton";
 import SearchScreen from "../screens/SearchScreen";
+import SearchBar from "../components/search/SearchBar";
 
 export default function Navigation() {
     const BottomTabNavigator = createBottomTabNavigator();
+    
+    const Tab = createBottomTabNavigator();
 
     return (
         <NavigationContainer>
@@ -42,6 +45,8 @@ export default function Navigation() {
 
                 }}/>
             </BottomTabNavigator.Navigator>
+            <BottomTabNavigator.Screen name="Search" component={SearchBar} />
+
         </NavigationContainer>
     )
 }

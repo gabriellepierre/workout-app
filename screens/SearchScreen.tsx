@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Layout from '../components/Layout';
-import Title from '../components/Title';
-import PrimaryButton from '../components/PrimaryButton';
-import PlusButton from '../components/PlusButton';
-import SearchBar from '../components/SearchBar';
+import Title from '../components/shared/Title';
+import PrimaryButton from '../components/shared/PrimaryButton';
+import PlusButton from '../components/shared/PlusButton';
+import SearchBar from '../components/search/SearchBar';
 
 export default function SearchScreen() {
     const title = "Workout";

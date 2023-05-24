@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Layout from '../components/Layout';
-import Title from '../components/Title';
-import PrimaryButton from '../components/PrimaryButton';
-import PlusButton from '../components/PlusButton';
+import Title from '../components/shared/Title';
+import PrimaryButton from '../components/shared/PrimaryButton';
+import PlusButton from '../components/shared/PlusButton';
 
 export default function AccountScreen() {
     const title = "Workout";

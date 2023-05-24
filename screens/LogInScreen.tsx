@@ -6,7 +6,6 @@ export default function LogInScreen() {
         <View style={styles.centered}>
           <Text style={styles.title}>Workout</Text>
         </View>
-        <Text>Mon sous titre hyper bg</Text>
 
       </View>
     )
