@@ -9,6 +9,7 @@ export default function Title(props: TitleProps) {
     return (
       <View>
           <Text style={styles.title}>{props.title}</Text>
+          
           <Text style={styles.subtitle}>{props.subtitle}</Text>
       </View>
     )

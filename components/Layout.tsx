@@ -1,14 +1,11 @@
 import React, { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Title from './Title';
+import { StyleSheet, View } from 'react-native';
 import Navigation from '../navigation/Navigation';
-
 
 export default function Layout({children}:{children: ReactNode}) {
 
     return (
       <View style={styles.container}>
-        {/* <Title title={props.title} subtitle={props.subtitle}/> */}
         {children}
 
         <Navigation />

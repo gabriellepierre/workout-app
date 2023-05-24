@@ -2,12 +2,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import Layout from '../components/Layout';
 import Title from '../components/Title';
 import PrimaryButton from '../components/PrimaryButton';
+import PlusButton from '../components/PlusButton';
 
 export default function AccountScreen() {
     const title = "Workout";
     const subtitle = "Mon compte";
+    // Todo : replace the raw data with user data
 
     function logOut() {
+        //TODO: log out
         console.log("logged out");
     }
     return (
