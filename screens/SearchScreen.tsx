@@ -19,14 +19,19 @@ export default function SearchScreen() {
         //TODO: Logique de recherche à implémenter ici
 
       };
+
+      const handleFilter = () => {
+        //TODO: Logique de filtre ici
+      }
     
     return (
       <View style={styles.container}>
         <Title title={title} subtitle={subtitle} />
 
-        <View >
+        {/* <View style={styles.searchHeader}> */}
            <SearchBar onSearch={handleSearch}/>
-        </View>
+           {/* <PrimaryButton title="Filter" onPress={handleFilter}/> */}
+        {/* </View> */}
         <View style={styles.centered}>
             {/*  */}
         </View>
@@ -42,32 +47,17 @@ export default function SearchScreen() {
       width: '100%',
       backgroundColor: "#fff",
     },
-    // Style user data
-    flexed: {
-        marginTop: 10,
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignContent: "center",
-    },
-    between: {
-        justifyContent: "space-between",
-
-    },
-    properties: {
-        textTransform: "uppercase",
-        color: "#565656",
-    },
-    userData: {
-        fontWeight: "bold",
-        color: "#565656",
-
-    },
     // Style log out button
     centered : {
         alignItems: "center",
         marginVertical: 50
-    }
+    },
+    searchHeader: {
+        display: "flex",
+        flexDirection: "row",
+        width: "100%",
+    },
+    
 
   });
   

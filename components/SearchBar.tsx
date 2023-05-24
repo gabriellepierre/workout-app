@@ -20,12 +20,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       </TouchableOpacity>
       <TextInput
         style={styles.searchInput}
-        placeholder="Rechercher"
+        placeholder="RECHERCHER"
         placeholderTextColor="grey"
         onChangeText={setSearchText}
         onSubmitEditing={handleSearch}
       />
-      <View style={styles.separator} />
     </View>
   );
 };
@@ -36,10 +35,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: 5,
-    paddingHorizontal: 10,
+    padding: 10,
     marginBottom: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
+    borderBottomWidth: 2,
+    borderColor: '#565656',
   },
   searchButton: {
     marginRight: 10,
@@ -49,11 +48,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     fontSize: 16,
     textTransform: "uppercase",
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#ccc',
-    marginVertical: 8,
   },
 });
 
