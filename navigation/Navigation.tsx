@@ -1,9 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "../screens/HomeScreen";
-// import SettingsScreen from "../screens/SettingsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome } from "@expo/vector-icons";
 import AccountScreen from "../screens/AccountScreen";
+import PlusButton from "../components/PlusButton";
+import SearchScreen from "../screens/SearchScreen";
 
 export default function Navigation() {
     const BottomTabNavigator = createBottomTabNavigator();
@@ -15,28 +16,30 @@ export default function Navigation() {
                 name="Home" 
                 component={HomeScreen}
                 options={{
-                    // title: 'Home',
+                    title: '',
                     headerShown: false,
                     tabBarIcon: ({color}) => <TabBarIcon 
-                    name="home" color="darksalmon"/>,
-                }}/>
+                    name="home" color={color}/>,
+                }}
+            />
             <BottomTabNavigator.Screen 
                 name="Plus" 
-                component={AccountScreen}
+                component={SearchScreen}
                 options={{
+                    title: '',
                     headerShown: false,
-                    title: 'Plus',
                     tabBarIcon: ({color}) => <TabBarIcon 
-                    name="plus" color={"darksalmon"}/>,
+                    name="plus" color={color}/>,
             }}/>
             <BottomTabNavigator.Screen
                 name="Account" 
                 component={AccountScreen}
                 options={{
+                    // title: 'Account',
                     headerShown: false,
-                    title: 'Account',
                     tabBarIcon: ({color}) => <TabBarIcon 
-                    name="user" color={"darksalmon"}/>,
+                    name="user" color={color}/>,
+
                 }}/>
             </BottomTabNavigator.Navigator>
         </NavigationContainer>
