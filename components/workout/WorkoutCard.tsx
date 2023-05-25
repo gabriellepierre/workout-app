@@ -20,7 +20,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ onPress, title, date }) => {
 const styles = StyleSheet.create({
   card: {
     padding: 10,
-    backgroundColor: "#565656",
+    backgroundColor: "#4e5a65",
     borderRadius: 15,
     
   },

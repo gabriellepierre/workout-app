@@ -14,7 +14,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({ onPress, title, color, st
   if (color) {
     buttonStyles.push({ backgroundColor: color });
   } else {
-    buttonStyles.push({ backgroundColor: "#565656" });
+    buttonStyles.push({ backgroundColor: "#4e5a65" });
   }
 
   return (

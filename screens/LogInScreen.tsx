@@ -16,7 +16,7 @@ export default function LogInScreen() {
       flex: 1,
       color: "white",
       width: '100%',
-      backgroundColor: "#565656",
+      backgroundColor: "#2d343a",
     },
     centered: {
       marginLeft:10

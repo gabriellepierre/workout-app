@@ -6,6 +6,7 @@ import WorkoutCarousel from '../components/workout/WorkoutCarousel';
 import ProgramCard from '../components/program/ProgramCard';
 import { useState } from 'react';
 import PrimaryButton from '../components/shared/PrimaryButton';
+import PrimaryInput from '../components/shared/PrimaryInput';
 
 export default function HomeScreen() {
   const title = "Workout";
@@ -96,6 +97,8 @@ export default function HomeScreen() {
         
       </View>
       {/* #endregion User's program */}
+
+      {/* <PrimaryInput onSearch={goToProgram} dark={false} placeholderText={"EMAIL / PSEUDO"}/> */}
 
     </View>
   )

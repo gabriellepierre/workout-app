@@ -58,11 +58,11 @@ export default function AccountScreen() {
     },
     properties: {
         textTransform: "uppercase",
-        color: "#565656",
+        color: "#4e5a65",
     },
     userData: {
         fontWeight: "bold",
-        color: "#565656",
+        color: "#4e5a65",
 
     },
     // Style log out button

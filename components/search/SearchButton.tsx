@@ -19,7 +19,7 @@ const SearchButton: React.FC<SearchButtonProps> = ({ style }) => {
 
   return (
     <TouchableOpacity style={buttonStyles} onPress={toSearchScreen}>
-      <Ionicons name="md-search" size={24} color="#565656" />
+      <Ionicons name="md-search" size={24} color="#4e5a65" />
     </TouchableOpacity>
   );
 };

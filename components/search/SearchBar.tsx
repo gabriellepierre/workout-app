@@ -16,7 +16,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   return (
     <View style={styles.searchBar}>
       <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
-        <Ionicons name="md-search" size={24} color="#565656" />
+        <Ionicons name="md-search" size={24} color="#4e5a65" />
       </TouchableOpacity>
       <TextInput
         style={styles.searchInput}
@@ -34,11 +34,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
-    borderRadius: 5,
     padding: 10,
     marginBottom: 10,
     borderBottomWidth: 2,
-    borderColor: '#565656',
+    borderColor: '#4e5a65',
   },
   searchButton: {
     marginRight: 10,
