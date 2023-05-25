@@ -19,15 +19,6 @@ const MAX_TITLE_LENGTH = 13; // longueur maximale du titre
  const WorkoutCarousel: React.FC = (
   // carouselData: WorkoutData
   ) => {
-
-  function truncatedTitle(title: string) {
-    const truncatedTitle = title.length > MAX_TITLE_LENGTH
-    ? title.slice(0, MAX_TITLE_LENGTH) + '...'
-    : title;
-
-    return truncatedTitle;
-  }
-
     function goToWorkout() {
         // TODO: navigate to workout recap
       }
@@ -41,7 +32,7 @@ const MAX_TITLE_LENGTH = 13; // longueur maximale du titre
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <View style={styles.item}>
-                <WorkoutCard onPress={goToWorkout} date={item.date} title={truncatedTitle(item.title)} />
+                <WorkoutCard onPress={goToWorkout} date={item.date} title={item.title} />
               {/* TODO Affichez le contenu de chaque élément ici */}
             </View>
           )}

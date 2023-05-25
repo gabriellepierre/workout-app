@@ -28,10 +28,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 15,
     borderRadius: 30,
-    width: "50%",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
+    width: "50%"
     
   },
   buttonText: {
