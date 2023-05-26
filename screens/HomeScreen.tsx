@@ -7,6 +7,8 @@ import ProgramCard from '../components/program/ProgramCard';
 import { useState } from 'react';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import PrimaryInput from '../components/shared/PrimaryInput';
+import { useNavigation } from '@react-navigation/native';
+import HomeNavigation from '../navigation/HomeNavigation';
 
 export default function HomeScreen() {
   const title = "Workout";
@@ -19,6 +21,9 @@ export default function HomeScreen() {
   //TODO : add workout data in userWorkouts
   const userWorkouts = [];
   const [hasWorkouts, setHasWorkouts] = useState(true); // default to false when linked to db
+
+  const navigation = useNavigation();
+
 
   if (userWorkouts.length > 0) {
     setHasWorkouts(true);
@@ -49,23 +54,29 @@ export default function HomeScreen() {
 
   function goToProgram() {
     // TODO: navigate to program
+    // navigation.navigate("Program");
   }
 
   function addProgram() {
     // TODO: navigate to programs list
+    // navigation.navigate("Workout");
+
   }
   // #endregion Program
+
+  function toSearchScreen() {
+    navigation.navigate("Research");
+  }
 
 
   return (
     <View style={styles.container}>
       <Title title={title} subtitle={subtitle}/>
-
       {/* #region User's lasts workouts */}
       <View>
         <View style={styles.flexed}>
           <Subtitle text={myWorkouts}/>
-          <SearchButton />
+          <SearchButton toSearchScreen={toSearchScreen}/>
         </View>
         {hasWorkouts ? (
           <WorkoutCarousel/>)
@@ -84,7 +95,7 @@ export default function HomeScreen() {
       <View>
         <View style={styles.flexed}>
           <Subtitle text={myProgram}/>
-          <SearchButton />
+          <SearchButton toSearchScreen={toSearchScreen} />
         </View>
         {hasProgram ? (
           <ProgramCard onPress={goToProgram} title='Nom du programme' objective='Perte de poids' workoutName='Haut du corps' />)

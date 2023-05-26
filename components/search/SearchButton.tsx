@@ -6,16 +6,12 @@ import { useNavigation } from '@react-navigation/native';
 
 interface SearchButtonProps {
   style?: ViewStyle;
+  toSearchScreen: () => void;
 }
 
-const SearchButton: React.FC<SearchButtonProps> = ({ style }) => {
+const SearchButton: React.FC<SearchButtonProps> = ({ style, toSearchScreen }) => {
   const buttonStyles = [styles.button, style];
   const navigation = useNavigation();
-
-  function toSearchScreen() {
-//     navigation.navigate('Search');
-
-  }
 
   return (
     <TouchableOpacity style={buttonStyles} onPress={toSearchScreen}>
