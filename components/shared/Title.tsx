@@ -1,16 +1,23 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ViewStyle } from 'react-native';
 
 type TitleProps= {
     title: string;
     subtitle: string;
+    dark?: boolean;
 }
 
-export default function Title(props: TitleProps) {
+export default function Title({title, subtitle, dark}: TitleProps) {
+  const titleStyle = [styles.title];
+  const subtitleStyle = [styles.subtitle];
+  if (dark) {
+    titleStyle.push({ color: 'white' });
+    subtitleStyle.push({ color: 'white'});
+  } 
     return (
       <View>
-          <Text style={styles.title}>{props.title}</Text>
+          <Text style={titleStyle}>{title}</Text>
           
-          <Text style={styles.subtitle}>{props.subtitle}</Text>
+          <Text style={subtitleStyle}>{subtitle}</Text>
       </View>
     )
   };
@@ -20,12 +27,10 @@ export default function Title(props: TitleProps) {
       marginTop: 60,
       fontSize: 80,
       fontWeight: "800",
-      color: "black",
     },
     subtitle: {
         marginVertical: 20,
         fontSize: 20,
-        color: "black",
         textTransform: "uppercase",
       }
   });

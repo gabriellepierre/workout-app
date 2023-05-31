@@ -8,12 +8,10 @@ export default function Navigation() {
     const Stack = createStackNavigator();
     const [userAccess, setUserAccess] = useState("Connexion");
 
-    let isConnected = false;
+    let isConnected = false; //Set to false when user is linked
     if (isConnected) {
         setUserAccess("Business")
     }
-
-
     return (
         <NavigationContainer>
             <Stack.Navigator 
@@ -21,6 +19,7 @@ export default function Navigation() {
                 screenOptions={{ headerShown: false,}}
             >
                 <Stack.Screen name="Connexion" component={ConnexionNavigation}/>
+            
                 <Stack.Screen name="Business" component={BusinessNavigation}/>
             </Stack.Navigator>
         </NavigationContainer>

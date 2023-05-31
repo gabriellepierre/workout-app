@@ -1,13 +1,48 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import Title from '../components/shared/Title';
+import Layout from '../components/layouts/Layout';
+import PrimaryInput from '../components/shared/PrimaryInput';
+import PrimaryButton from '../components/shared/PrimaryButton';
+import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function LogInScreen() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.centered}>
-          <Text style={styles.title}>Workout</Text>
-        </View>
 
-      </View>
+  const navigation = useNavigation();
+  function emailInput() {
+    // TODO: register email
+  }
+
+  function handleLogIn () {
+    // TODO: log in
+  }
+
+  function pwdInput() {
+    // TODO: register email
+  }
+
+  function toSignInScreen() {
+    navigation.navigate("SignIn");
+  }
+    return (
+      <Layout dark={true}>
+        <View style={styles.container}>
+          <Title title='Workout' subtitle='Se connecter' dark={true}/>
+          <View style={styles.form}>
+            <PrimaryInput dark={true} onWrite={emailInput} placeholderText="EMAIL / PSEUDO"/>
+            <PrimaryInput dark={true} onWrite={pwdInput} placeholderText="MOT DE PASSE"/>
+          </View>
+          <View style={styles.centered}>
+            <PrimaryButton onPress={handleLogIn} title='Se connecter' color="white" textStyle={{color: "black"}}/>
+            <TouchableOpacity onPress={toSignInScreen}>
+              <Text style={styles.signIn}> Ou s'inscrire</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={[styles.centered, styles.form]}>
+            <Ionicons name="barbell-outline" size={50} color="white" />
+          </View>
+        </View>
+      </Layout>
     )
   };
   
@@ -15,17 +50,17 @@ export default function LogInScreen() {
     container: {
       flex: 1,
       color: "white",
-      width: '100%',
-      backgroundColor: "#2d343a",
     },
     centered: {
-      marginLeft:10
-      // alignItems: "center"
+      alignItems: "center"
     },
-    title: {
-      marginTop: 50,
-      fontSize: 70,
-      fontWeight: "bold",
+    form: {
+      marginVertical: 100,
+    },
+    signIn: {
       color: "white",
+      textTransform: "uppercase",
+      marginVertical: 20,
+      textDecorationLine: "underline"
     }
   });
