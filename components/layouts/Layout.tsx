@@ -1,13 +1,26 @@
 import React, { ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
-import Navigation from '../../navigation/Navigation';
+import { StyleSheet, Text, View, ViewStyle } from 'react-native';
 
-export default function Layout({children}:{children: ReactNode}) {
+type LayoutProps = {
+  children: ReactNode;
+  dark?: boolean;
+  style?: ViewStyle;
+}
+
+export default function Layout({children, dark, style}: LayoutProps) {
+  const layoutStyle = [styles.container, style];
+
+  if (dark) {
+    layoutStyle.push({ backgroundColor: "#2d343a" });
+  } else {
+    layoutStyle.push({ backgroundColor: '#fff' });
+  }
+
 
     return (
-      <View style={styles.container}>
+      <View style={layoutStyle}>
         {children}
-        <Navigation />
+
       </View>
     )
   };
@@ -16,6 +29,7 @@ export default function Layout({children}:{children: ReactNode}) {
     container: {
       flex: 1,
       width: '100%',
+      paddingHorizontal:20,
     },
   });
   
