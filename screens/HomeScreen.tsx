@@ -6,9 +6,9 @@ import WorkoutCarousel from '../components/workout/WorkoutCarousel';
 import ProgramCard from '../components/program/ProgramCard';
 import { useState } from 'react';
 import PrimaryButton from '../components/shared/PrimaryButton';
-import PrimaryInput from '../components/shared/PrimaryInput';
 import { useNavigation } from '@react-navigation/native';
-import HomeNavigation from '../navigation/HomeNavigation';
+import Layout from '../components/layouts/Layout';
+import PlusButton from '../components/shared/PlusButton';
 
 export default function HomeScreen() {
   const title = "Workout";
@@ -30,7 +30,8 @@ export default function HomeScreen() {
   }
 
   function createWorkout() {
-    // TODO: navigate to workout creation
+    //@ts-ignore
+    navigation.navigate("Workout");
   }
 
   function goToWorkout() {
@@ -57,61 +58,60 @@ export default function HomeScreen() {
     // navigation.navigate("Program");
   }
 
-  function addProgram() {
-    // TODO: navigate to programs list
-    // navigation.navigate("Workout");
-
-  }
   // #endregion Program
 
   function toSearchScreen() {
+    //@ts-ignore
     navigation.navigate("Research");
   }
 
 
   return (
-    <View style={styles.container}>
-      <Title title={title} subtitle={subtitle}/>
-      {/* #region User's lasts workouts */}
-      <View>
-        <View style={styles.flexed}>
-          <Subtitle text={myWorkouts}/>
-          <SearchButton toSearchScreen={toSearchScreen}/>
+    <Layout>
+      <View style={styles.container}>
+        <Title title={title} subtitle={subtitle}/>
+        {/* #region User's lasts workouts */}
+        <View>
+          <View style={styles.flexed}>
+            <Subtitle text={myWorkouts}/>
+            <SearchButton toSearchScreen={toSearchScreen}/>
+          </View>
+          {hasWorkouts ? (
+            <WorkoutCarousel/>)
+            : (
+              <View style={styles.noWorkoutArea}>
+                <Text> Vous n'avez pas encore fait de séance.</Text>
+                <PrimaryButton onPress={createWorkout} title='Commencer une séance' style={styles.buttonAdd} />
+              </View>
+            )
+          }
+          
         </View>
-        {hasWorkouts ? (
-          <WorkoutCarousel/>)
-          : (
-            <View style={styles.noWorkoutArea}>
-              <Text> Vous n'avez pas encore fait de séance.</Text>
-              <PrimaryButton onPress={createWorkout} title='Commencer une séance' style={styles.buttonAdd} />
-            </View>
-          )
-        }
-        
-      </View>
-      {/* #endregion User's lasts workouts */}
+        {/* #endregion User's lasts workouts */}
 
-      {/* #region User's program */}
-      <View>
-        <View style={styles.flexed}>
-          <Subtitle text={myProgram}/>
-          <SearchButton toSearchScreen={toSearchScreen} />
+        {/* #region User's program */}
+        <View>
+          <View style={styles.flexed}>
+            <Subtitle text={myProgram}/>
+            <SearchButton toSearchScreen={toSearchScreen} />
+          </View>
+          {hasProgram ? (
+            <ProgramCard onPress={goToProgram} title='Nom du programme' objective='Perte de poids' workoutName='Haut du corps' />)
+            : (
+              <View style={styles.noWorkoutArea}>
+                <PrimaryButton onPress={toSearchScreen} title='Commencer un programme' style={styles.buttonAdd} />
+              </View>
+            )
+          }
+          
         </View>
-        {hasProgram ? (
-          <ProgramCard onPress={goToProgram} title='Nom du programme' objective='Perte de poids' workoutName='Haut du corps' />)
-          : (
-            <View style={styles.noWorkoutArea}>
-              <PrimaryButton onPress={addProgram} title='Commencer un programme' style={styles.buttonAdd} />
-            </View>
-          )
-        }
-        
+        {/* #endregion User's program */}
+
+        <View style={styles.centered}>
+          <PlusButton onPress={createWorkout}/>
+        </View>
       </View>
-      {/* #endregion User's program */}
-
-      {/* <PrimaryInput onSearch={goToProgram} dark={false} placeholderText={"EMAIL / PSEUDO"}/> */}
-
-    </View>
+    </Layout>
   )
 };
   
@@ -122,7 +122,8 @@ export default function HomeScreen() {
       backgroundColor: "#fff",
     },
     centered: {
-      // alignItems: "center"
+      marginTop: 10,
+      alignItems: "center"
     },
     flexed: {
       marginTop: 10,

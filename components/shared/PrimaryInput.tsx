@@ -43,17 +43,18 @@ const styles = StyleSheet.create({
   inputBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
+    paddingVertical: 10,
     marginBottom: 10,
   },
   
   borderWhite : {
     borderBottomWidth: 2,
     borderColor: "white",
+    color: "white",
   },
   borderSlate: {
     borderBottomWidth: 2,
-    borderColor: "#4e5a65",
+    borderColor: "#364d53",
   },
   textInput: {
     flex: 1,

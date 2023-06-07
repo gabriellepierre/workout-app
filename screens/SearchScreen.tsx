@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
-import Layout from '../components/Layout';
 import Title from '../components/shared/Title';
-import PrimaryButton from '../components/shared/PrimaryButton';
-import PlusButton from '../components/shared/PlusButton';
+import {useState} from 'react';
 import SearchBar from '../components/search/SearchBar';
+import Layout from '../components/layouts/Layout';
+import PrimaryButton from '../components/shared/PrimaryButton';
+import { FontAwesome } from "@expo/vector-icons";
+import FilterModal from '../components/search/FilterModal';
 
 export default function SearchScreen() {
     const title = "Workout";
@@ -20,24 +22,42 @@ export default function SearchScreen() {
 
       };
 
+      const [openFilter, setOpenFilter] = useState(false);
+
       const handleFilter = () => {
+        setOpenFilter(true);
         //TODO: Logique de filtre ici
+      }
+      
+      const createProgram = () => {
+        //TODO: navigate to program creation page
       }
     
     return (
-      <View style={styles.container}>
-        <Title title={title} subtitle={subtitle} />
+      <Layout>
+        <View style={styles.container}>
+          <Title title={title} subtitle={subtitle} />
+          {/* style={styles.searchHeader} */}
 
-        {/* <View style={styles.searchHeader}> */}
-           <SearchBar onSearch={handleSearch}/>
-           {/* <PrimaryButton title="Filter" onPress={handleFilter}/> */}
-        {/* </View> */}
-        <View style={styles.centered}>
-            {/*  */}
+          <View style={styles.searchHeader}>
+            <View style={styles.flexed}>
+              <SearchBar onSearch={handleSearch}/>
+            </View>
+            <View style={styles.flexed}>
+              <PrimaryButton title="Filtrer" onPress={handleFilter} icon={<FontAwesome size={15} name={"filter"} color="white" style={{marginHorizontal: 5}} />}/>
+            </View>
+          </View>
+          {openFilter && 
+            <FilterModal visible={openFilter} onClose={() => setOpenFilter(false)}/>
+          }
+          <View style={styles.centered}>
+            <View>
+              <PrimaryButton title="Créer un programme" onPress={createProgram} />
+            </View>
+          </View>
+
         </View>
-        {/* <PlusButton onPress={logOut}/> */}
-
-      </View>
+      </Layout>
     )
   };
   
@@ -47,15 +67,18 @@ export default function SearchScreen() {
       width: '100%',
       backgroundColor: "#fff",
     },
+    flexed: {
+      flex: 1,
+    },
     // Style log out button
     centered : {
         alignItems: "center",
         marginVertical: 50
     },
     searchHeader: {
-        display: "flex",
         flexDirection: "row",
         width: "100%",
+        // TODO : faire en sorte que la section prenne la largeur de l'écran
     },
     
 

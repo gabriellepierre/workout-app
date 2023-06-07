@@ -22,6 +22,8 @@ export default function SignInScreen() {
 
   function handleSignIn () {
     // TODO: sign in
+    //@ts-ignore
+    navigation.navigate("Home");
   }
 
     return (

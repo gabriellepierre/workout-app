@@ -15,7 +15,7 @@ const PlusButton: React.FC<PlusButtonProps> = ({ onPress, color, style }) => {
   if (color) {
     buttonStyles.push({ backgroundColor: color });
   } else {
-    buttonStyles.push({ backgroundColor: "#4e5a65" });
+    buttonStyles.push({ backgroundColor: "#364d53" });
   }
 
   return (

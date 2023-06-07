@@ -15,6 +15,8 @@ export default function LogInScreen() {
 
   function handleLogIn () {
     // TODO: log in
+    //@ts-ignore
+    navigation.navigate("Home");
   }
 
   function pwdInput() {
@@ -22,6 +24,7 @@ export default function LogInScreen() {
   }
 
   function toSignInScreen() {
+    //@ts-ignore
     navigation.navigate("SignIn");
   }
     return (

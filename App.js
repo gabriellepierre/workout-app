@@ -1,21 +1,29 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import Layout from "./components/layouts/Layout";
+import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import Navigation from "./navigation/Navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
+import BottomBarNavigation from "./navigation/BottomBarNavigation";
+import ConnexionNavigation from "./navigation/ConnexionNavigation";
+import BusinessNavigation from "./navigation/BusinessNavigation";
+import WorkoutNavigation from "./navigation/WorkoutNavigation";
 
 export default function App() {
   return (
-    <Layout>
-      <View>
-        <StatusBar style="auto" />
-      </View>
-    </Layout>
+    <View style={styles.container}>
+      <StatusBar style="auto" />
+
+      {/* <Navigation /> */}
+      <NavigationContainer>
+        <ConnexionNavigation />
+      </NavigationContainer>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    width: "100%",
   },
 });

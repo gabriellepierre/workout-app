@@ -11,7 +11,9 @@ export default function Layout({children, dark, style}: LayoutProps) {
   const layoutStyle = [styles.container, style];
 
   if (dark) {
-    layoutStyle.push({ backgroundColor: "#2d343a" });
+    layoutStyle.push({ backgroundColor: "#364d53" });
+    // JAM 60100B
+    // ff8583
   } else {
     layoutStyle.push({ backgroundColor: '#fff' });
   }
