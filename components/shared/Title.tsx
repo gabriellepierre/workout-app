@@ -10,7 +10,9 @@ export default function Title({title, subtitle, dark}: TitleProps) {
   const titleStyle = [styles.title];
   const subtitleStyle = [styles.subtitle];
   if (dark) {
+    //@ts-ignore
     titleStyle.push({ color: 'white' });
+    //@ts-ignore
     subtitleStyle.push({ color: 'white'});
   } 
     return (
@@ -27,6 +29,7 @@ export default function Title({title, subtitle, dark}: TitleProps) {
       marginTop: 60,
       fontSize: 80,
       fontWeight: "800",
+      color: "#364d53"
     },
     subtitle: {
         marginVertical: 20,
