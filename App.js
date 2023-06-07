@@ -11,8 +11,6 @@ import WorkoutNavigation from "./navigation/WorkoutNavigation";
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
-
       {/* <Navigation /> */}
       <NavigationContainer>
         <ConnexionNavigation />

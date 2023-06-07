@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import React, { ReactNode } from 'react';
 import { StyleSheet, Text, View, ViewStyle } from 'react-native';
 
@@ -21,6 +22,12 @@ export default function Layout({children, dark, style}: LayoutProps) {
 
     return (
       <View style={layoutStyle}>
+        {dark ? 
+          <StatusBar style='light' />
+        :
+          <StatusBar style='auto' />
+        }
+        
         {children}
 
       </View>
