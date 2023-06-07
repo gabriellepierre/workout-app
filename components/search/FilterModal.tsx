@@ -150,12 +150,12 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   filterSection: {
-    marginBottom: 16,
+    marginBottom: 20,
   },
   filterSectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 8,
+    marginBottom: 10,
     color: 'white',
   },
   radioButton: {
@@ -170,7 +170,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 16,
+    marginTop: 20,
+    marginBottom: 40,
     width: '100%',
     gap: 10,
   },
