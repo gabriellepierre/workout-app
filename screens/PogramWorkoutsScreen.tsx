@@ -10,7 +10,7 @@ import ComboBox from '../components/shared/ComboBox';
 import { PROGRAM_OBJECTIVE } from '../model/program/Objective';
 import { PROGRAM_LEVEL } from '../model/program/Level';
 
-export default function ProgramCreationScreen() {
+export default function ProgramWorkoutScreen() {
 
   // TODO remplacer program par le vrai programme
   const programNumber = programs.length;
@@ -65,7 +65,8 @@ export default function ProgramCreationScreen() {
       color: "white",
     },
     centered: {
-      alignItems: "center"
+      alignItems: "center",
+      marginTop: 20,
     },
     form: {
       marginTop: 20,

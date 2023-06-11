@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, ViewStyle } from 'react-native';
 
 interface PrimaryInputProps {
-  onWrite: (searchText: string) => void;
+  onWrite: (textValue: string) => void;
   dark: boolean;
   placeholderText: string;
   style?: ViewStyle;

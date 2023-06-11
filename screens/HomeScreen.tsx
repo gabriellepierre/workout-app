@@ -9,18 +9,22 @@ import PrimaryButton from '../components/shared/PrimaryButton';
 import { useNavigation } from '@react-navigation/native';
 import Layout from '../components/layouts/Layout';
 import PlusButton from '../components/shared/PlusButton';
+import { workouts } from '../data/WorkoutData';
 
 export default function HomeScreen() {
   const title = "Workout";
   const subtitle = "Suit tes progrès";
+
+  // TODO : const user ; avec le user logué
 
 
   // #region Workouts
   const myWorkouts= "Mes séances";
 
   //TODO : add workout data in userWorkouts
-  const userWorkouts = [];
-  const [hasWorkouts, setHasWorkouts] = useState(true); // default to false when linked to db
+  // const userWorkouts = workouts?.filter(e => e.author === "gabrielle.pierre19@gmail.com");
+const userWorkouts = [];
+  const [hasWorkouts, setHasWorkouts] = useState(true); // TODO default to false when linked to db
 
   const navigation = useNavigation();
 
@@ -32,6 +36,7 @@ export default function HomeScreen() {
   function createWorkout() {
     //@ts-ignore
     navigation.navigate("Workout");
+    // navigation.navigate("Program");
   }
 
   function goToWorkout() {
@@ -54,6 +59,8 @@ export default function HomeScreen() {
 
 
   function goToProgram() {
+    //@ts-ignore
+    navigation.navigate("ProgramRecap");
     // TODO: navigate to program
     // navigation.navigate("Program");
   }
@@ -63,6 +70,7 @@ export default function HomeScreen() {
   function toSearchScreen() {
     //@ts-ignore
     navigation.navigate("Research");
+
   }
 
 
@@ -77,7 +85,7 @@ export default function HomeScreen() {
             <SearchButton toSearchScreen={toSearchScreen}/>
           </View>
           {hasWorkouts ? (
-            <WorkoutCarousel/>)
+            <WorkoutCarousel carouselData={workouts.filter(e => e.author === "gabrielle.pierre19@gmail.com")} />)
             : (
               <View style={styles.noWorkoutArea}>
                 <Text> Vous n'avez pas encore fait de séance.</Text>

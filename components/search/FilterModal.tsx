@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import PrimaryButton from '../shared/PrimaryButton';
+import { PROGRAM_LEVEL } from '../../model/program/Level';
+import { PROGRAM_OBJECTIVE } from '../../model/program/Objective';
 
 interface FilterModalProps {
   visible: boolean;
@@ -20,6 +22,9 @@ const FilterModal: React.FC<FilterModalProps> = ({ visible, onClose }) => {
     onClose(); // Fermer la modal après avoir appliqué les filtres
   };
 
+  const objectives = PROGRAM_OBJECTIVE;
+  const levels = PROGRAM_LEVEL;
+
   const handleClearFilters = () => {
     // Gérer la réinitialisation des filtres ici
     setSelectedOption1(null);
@@ -33,86 +38,37 @@ const FilterModal: React.FC<FilterModalProps> = ({ visible, onClose }) => {
             <Text style={styles.modalTitle}>Filtrer par</Text>
             <View style={styles.filterSection}>
               <Text style={styles.filterSectionTitle}>Objectif</Text>
-              <TouchableOpacity
+
+              {objectives.map((item) => 
+                <TouchableOpacity
                 style={styles.radioButton}
-                onPress={() => setSelectedOption1('Perte de poids')}
+                onPress={() => setSelectedOption1(item)}
               >
                 <Ionicons
-                  name={selectedOption1 === 'Perte de poids' ? 'md-radio-button-on' : 'md-radio-button-off'}
+                  name={selectedOption1 === item ? 'md-radio-button-on' : 'md-radio-button-off'}
                   size={24}
                   color="#fff"
                 />
-                <Text style={styles.radioButtonLabel}>Perte de poids</Text>
+                <Text style={styles.radioButtonLabel}>{item}</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.radioButton}
-                onPress={() => setSelectedOption1('Amélioration du cardio')}
-              >
-                <Ionicons
-                  name={selectedOption1 === 'Amélioration du cardio' ? 'md-radio-button-on' : 'md-radio-button-off'}
-                  size={24}
-                  color="#fff"
-                />
-                <Text style={styles.radioButtonLabel}>Amélioration du cardio</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.radioButton}
-                onPress={() => setSelectedOption1('Maintien de la forme')}
-              >
-                <Ionicons
-                  name={selectedOption1 === 'Maintien de la forme' ? 'md-radio-button-on' : 'md-radio-button-off'}
-                  size={24}
-                  color="#fff"
-                />
-                <Text style={styles.radioButtonLabel}>Maintien de la forme</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.radioButton}
-                onPress={() => setSelectedOption1('Prise de muscle')}
-              >
-                <Ionicons
-                  name={selectedOption1 === 'Prise de muscle' ? 'md-radio-button-on' : 'md-radio-button-off'}
-                  size={24}
-                  color="#fff"
-                />
-                <Text style={styles.radioButtonLabel}>Prise de muscle</Text>
-              </TouchableOpacity>
+              )}
             </View>
             <View style={styles.filterSection}>
               <Text style={styles.filterSectionTitle}>Niveau</Text>
-              <TouchableOpacity
-                style={styles.radioButton}
-                onPress={() => setSelectedOption2('Débutant')}
-              >
-                <Ionicons
-                  name={selectedOption2 === 'Débutant' ? 'md-radio-button-on' : 'md-radio-button-off'}
-                  size={24}
-                  color="#fff"
-                />
-                <Text style={styles.radioButtonLabel}>Débutant</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.radioButton}
-                onPress={() => setSelectedOption2('Intermédiaire')}
-              >
-                <Ionicons
-                  name={selectedOption2 === 'Intermédiaire' ? 'md-radio-button-on' : 'md-radio-button-off'}
-                  size={24}
-                  color="#fff"
-                />
-                <Text style={styles.radioButtonLabel}>Intermédiaire</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.radioButton}
-                onPress={() => setSelectedOption2('Avancé')}
-              >
-                <Ionicons
-                  name={selectedOption2 === 'Avancé' ? 'md-radio-button-on' : 'md-radio-button-off'}
-                  size={24}
-                  color="#fff"
-                />
-                <Text style={styles.radioButtonLabel}>Avancé</Text>
-              </TouchableOpacity>
+              
+              {levels.map((item) => 
+                <TouchableOpacity
+                  style={styles.radioButton}
+                  onPress={() => setSelectedOption2(item)}
+                >
+                  <Ionicons
+                    name={selectedOption2 === item ? 'md-radio-button-on' : 'md-radio-button-off'}
+                    size={24}
+                    color="#fff"
+                  />
+                  <Text style={styles.radioButtonLabel}>{item}</Text>
+                </TouchableOpacity>
+                )}
             </View>
             <View style={styles.buttonContainer}>
               <PrimaryButton onPress={handleClearFilters} title='Réinitialiser' color='#ec9374' textStyle={{color: "white"}} />
@@ -166,6 +122,7 @@ const styles = StyleSheet.create({
   radioButtonLabel: {
     marginLeft: 8,
     color: 'white',
+    textTransform: "uppercase"
   },
   buttonContainer: {
     flexDirection: 'row',

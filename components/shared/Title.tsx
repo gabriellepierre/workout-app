@@ -17,9 +17,9 @@ export default function Title({title, subtitle, dark}: TitleProps) {
   } 
     return (
       <View>
-          <Text style={titleStyle}>{title}</Text>
+          <Text style={titleStyle} numberOfLines={3}>{title}</Text>
           
-          <Text style={subtitleStyle}>{subtitle}</Text>
+          <Text style={subtitleStyle} numberOfLines={1}>{subtitle}</Text>
       </View>
     )
   };
@@ -27,7 +27,7 @@ export default function Title({title, subtitle, dark}: TitleProps) {
   const styles = StyleSheet.create({
     title: {
       marginTop: 60,
-      fontSize: 80,
+      fontSize: 70,
       fontWeight: "800",
       color: "#364d53"
     },
@@ -35,6 +35,7 @@ export default function Title({title, subtitle, dark}: TitleProps) {
         marginVertical: 20,
         fontSize: 20,
         textTransform: "uppercase",
+        fontWeight: "500",
       }
   });
   

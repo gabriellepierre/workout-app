@@ -16,7 +16,7 @@ const exercicesWorkout: ExerciseType[] = [
   ];
 
 export const workouts: WorkoutType[] = [
-    { _id: "11", author:"gabrielle.pierre19@gmail.com", name:"leg day", exercises: exercicesWorkout, },
+    { _id: "11", author:"gabrielle.pierre19@gmail.com", name:"leg day", exercises: exercicesWorkout },
     { _id: "21", author:"gabrielle.pierre19@gmail.com", name:"glutes day", exercises: exercicesWorkout },
     { _id: "31", author:"gabrielle.pierre19@gmail.com", name:"back day"},
     { _id: "51", author:"hectortest@gmail.com", name:"leg day", exercises: exercicesWorkout },

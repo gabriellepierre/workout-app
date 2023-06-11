@@ -20,7 +20,7 @@ export default function LogInScreen() {
   }
 
   function pwdInput() {
-    // TODO: register email
+    // TODO: register password
   }
 
   function toSignInScreen() {
@@ -32,7 +32,7 @@ export default function LogInScreen() {
         <View style={styles.container}>
           <Title title='Workout' subtitle='Se connecter' dark={true}/>
           <View style={styles.form}>
-            <PrimaryInput dark={true} onWrite={emailInput} placeholderText="EMAIL / PSEUDO"/>
+            <PrimaryInput dark={true} onWrite={emailInput} placeholderText="EMAIL"/>
             <PrimaryInput dark={true} onWrite={pwdInput} placeholderText="MOT DE PASSE"/>
           </View>
           <View style={styles.centered}>
