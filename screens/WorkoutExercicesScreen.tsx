@@ -6,29 +6,30 @@ import SearchBar from '../components/search/SearchBar';
 import ExerciseCard from '../components/workout/ExerciseCard';
 import { useState } from 'react';
 
-import { Text, View, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
-import { Card, Checkbox, Paragraph } from 'react-native-paper';
+import { View, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
+import { Checkbox } from 'react-native-paper';
+import { exercises } from '../data/ExercisesData';
 
 
-const data = [
-  { id: 1, title: 'Développé couché', bodyPart: 'pectoraux' },
-  { id: 2, title: 'Soulevé de terre', bodyPart: 'Bas du corps' },
-  { id: 3, title: 'Squat', bodyPart: 'Bas du corps' },
-  { id: 4, title: 'Hip trust', bodyPart: 'Fessiers' },
-  { id: 5, title: 'Développé couché', bodyPart: 'pectoraux' },
-  { id: 6, title: 'Soulevé de terre', bodyPart: 'Bas du corps' },
-  { id: 7, title: 'Squat', bodyPart: 'Bas du corps' },
-  { id: 8, title: 'Hip trust', bodyPart: 'Fessiers' },
-  { id: 9, title: 'Développé couché', bodyPart: 'pectoraux' },
-  { id: 10, title: 'Soulevé de terre', bodyPart: 'Bas du corps' },
-  { id: 11, title: 'Squat', bodyPart: 'Bas du corps' },
-  { id: 12, title: 'Hip trust', bodyPart: 'Fessiers' },
-  // TODO Ajoutez les autres éléments de votre carrousel
-];
+// const data = [
+//   { id: 1, title: 'Développé couché', bodyPart: 'pectoraux' },
+//   { id: 2, title: 'Soulevé de terre', bodyPart: 'Bas du corps' },
+//   { id: 3, title: 'Squat', bodyPart: 'Bas du corps' },
+//   { id: 4, title: 'Hip trust', bodyPart: 'Fessiers' },
+//   { id: 5, title: 'Développé couché', bodyPart: 'pectoraux' },
+//   { id: 6, title: 'Soulevé de terre', bodyPart: 'Bas du corps' },
+//   { id: 7, title: 'Squat', bodyPart: 'Bas du corps' },
+//   { id: 8, title: 'Hip trust', bodyPart: 'Fessiers' },
+//   { id: 9, title: 'Développé couché', bodyPart: 'pectoraux' },
+//   { id: 10, title: 'Soulevé de terre', bodyPart: 'Bas du corps' },
+//   { id: 11, title: 'Squat', bodyPart: 'Bas du corps' },
+//   { id: 12, title: 'Hip trust', bodyPart: 'Fessiers' },
+//   // TODO Ajoutez les autres éléments de votre carrousel
+// ];
 
 export default function WorkoutExercicesScreen() {
 
-    const workoutName = "Séance n° X";
+  const workoutName = "Séance n° X";
 
   const navigation = useNavigation();
 
@@ -64,20 +65,20 @@ export default function WorkoutExercicesScreen() {
     return (
       <Layout>
         <View style={styles.container}>
-          <Title title='Workout' subtitle="Choisir des exercices"/>
+          <Title title={workoutName} subtitle="Choisir des exercices"/>
           <View style={styles.search}>
             <SearchBar onSearch={handleExerciseSearch} />
           </View>
           <View style={styles.list}>
               <FlatList
-                data={data}
-                keyExtractor={(item) => item.id.toString()}
+                data={exercises}
+                keyExtractor={(item) => item._id}
                 renderItem={({ item }) => (
-                  <TouchableOpacity onPress={() => toggleItem(item.id)}>
-                      <ExerciseCard bodyPart={item.bodyPart} title={item.title} onPress={() => toggleItem(item.id)} checkbox={
-                        <Checkbox status={isChecked(item.id) ? "checked" : "unchecked"} color='white' />
+                  <TouchableOpacity onPress={() => toggleItem(item._id)}>
+                      <ExerciseCard exercise={item} checkbox={
+                        <Checkbox status={isChecked(item._id) ? "checked" : "unchecked"} color='white' />
                       }
-                      style={isChecked(item.id)}
+                      style={isChecked(item._id)}
                       />
                   </TouchableOpacity>
                 )}
@@ -97,7 +98,7 @@ export default function WorkoutExercicesScreen() {
       color: "white",
     },
     list:{
-      height: "50%",
+      height: "40%",
     },
     centered: {
       alignItems: "center",
