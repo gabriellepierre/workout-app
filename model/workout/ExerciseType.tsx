@@ -1,8 +1,9 @@
+import { BaseProperties } from "../BaseProperties";
 import { SetType } from "./SetType";
 
-export interface ExerciseType {
-    _id: string,
+export interface ExerciseType extends BaseProperties {
     name: string,
-    musclesEngaged: string[],
-    sets: SetType[]
+    musclesEngaged: string,
+    image?: string,
+    sets?: SetType[]
 }

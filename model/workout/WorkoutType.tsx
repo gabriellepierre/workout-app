@@ -1,9 +1,9 @@
+import { BaseProperties } from "../BaseProperties";
 import { ExerciseType } from "./ExerciseType";
 
-export interface WorkoutType
+export interface WorkoutType extends BaseProperties
 {
-    _id: string,
-    author: string,  // Référencement INVERSE + One-to-Zillions : Id de l'utilisateur qui a créé son template de séance
+    author?: string,  // Référencement INVERSE + One-to-Zillions : Id de l'utilisateur qui a créé son template de séance
     name: string,
-    exercises: ExerciseType[], // Incorporation
+    exercises?: ExerciseType[], // Incorporation
 }
