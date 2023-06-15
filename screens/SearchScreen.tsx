@@ -6,11 +6,14 @@ import Layout from '../components/layouts/Layout';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import { FontAwesome } from "@expo/vector-icons";
 import FilterModal from '../components/search/FilterModal';
+import { useNavigation } from '@react-navigation/native';
 
 export default function SearchScreen() {
     const title = "Workout";
     const subtitle = "Rechercher un programme ou une séance";
     // Todo : replace the raw data with user data
+
+    const navigation = useNavigation();
 
     function search() {
         console.log("searching...");
@@ -31,6 +34,8 @@ export default function SearchScreen() {
       
       const createProgram = () => {
         //TODO: navigate to program creation page
+        // @ts-ignore
+        navigation.navigate("Program");
       }
     
     return (

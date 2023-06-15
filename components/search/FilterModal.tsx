@@ -43,6 +43,7 @@ const FilterModal: React.FC<FilterModalProps> = ({ visible, onClose }) => {
                 <TouchableOpacity
                 style={styles.radioButton}
                 onPress={() => setSelectedOption1(item)}
+                key={item}
               >
                 <Ionicons
                   name={selectedOption1 === item ? 'md-radio-button-on' : 'md-radio-button-off'}
@@ -60,6 +61,7 @@ const FilterModal: React.FC<FilterModalProps> = ({ visible, onClose }) => {
                 <TouchableOpacity
                   style={styles.radioButton}
                   onPress={() => setSelectedOption2(item)}
+                  key={item}
                 >
                   <Ionicons
                     name={selectedOption2 === item ? 'md-radio-button-on' : 'md-radio-button-off'}

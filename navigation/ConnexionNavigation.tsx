@@ -2,6 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LogInScreen from '../screens/LogInScreen';
 import SignInScreen from '../screens/SignInScreen';
 import HomeNavigation from './HomeNavigation';
+import BusinessNavigation from './BusinessNavigation';
 
 export default function ConnexionNavigation() {
   const Stack = createStackNavigator();
@@ -10,7 +11,7 @@ export default function ConnexionNavigation() {
         headerShown: false,}}>
         <Stack.Screen name="LogIn" component={LogInScreen}/>
         <Stack.Screen name="SignIn" component={SignInScreen}/>
-        <Stack.Screen name="Home" component={HomeNavigation}/>
+        <Stack.Screen name="Home" component={BusinessNavigation}/>
       </Stack.Navigator>
   )
 }

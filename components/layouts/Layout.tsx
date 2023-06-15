@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { ReactNode } from 'react';
-import { StyleSheet, Text, View, ViewStyle } from 'react-native';
+import { StyleSheet, Text, View, ViewStyle, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 type LayoutProps = {
   children: ReactNode;
@@ -21,6 +21,7 @@ export default function Layout({children, dark, style}: LayoutProps) {
 
 
     return (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={layoutStyle}>
         {dark ? 
           <StatusBar style='light' />
@@ -29,8 +30,8 @@ export default function Layout({children, dark, style}: LayoutProps) {
         }
         
         {children}
-
       </View>
+    </TouchableWithoutFeedback>
     )
   };
   

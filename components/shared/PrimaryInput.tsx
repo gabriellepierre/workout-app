@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, ViewStyle } from 'react-native';
+import { View, TextInput, StyleSheet, ViewStyle, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 interface PrimaryInputProps {
   onWrite: (textValue: string) => void;
@@ -27,15 +27,15 @@ const PrimaryInput: React.FC<PrimaryInputProps> = ({ onWrite, dark, placeholderT
   };
 
   return (
-    <View style={styles.inputBar}>
-      <TextInput
-        style={textStyle}
-        placeholder={placeholderText}
-        placeholderTextColor={placeholderColor}
-        onChangeText={setTextValue}
-        onSubmitEditing={handleInput}
-      />
-    </View>
+      <View style={styles.inputBar}>
+        <TextInput
+          style={textStyle}
+          placeholder={placeholderText}
+          placeholderTextColor={placeholderColor}
+          onChangeText={setTextValue}
+          onSubmitEditing={handleInput}
+        />
+      </View>
   );
 };
 

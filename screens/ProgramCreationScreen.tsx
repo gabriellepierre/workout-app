@@ -12,6 +12,7 @@ import { PROGRAM_LEVEL } from '../model/program/Level';
 
 export default function ProgramCreationScreen() {
 
+
   // TODO remplacer program par le vrai programme
   const programNumber = programs.length;
   const [programName, setProgramName] = useState("");
@@ -25,14 +26,11 @@ export default function ProgramCreationScreen() {
 
   const navigation = useNavigation();
 
-  function ProgramNaming() {
-    console.log();
-  }
-
   function postProgram () {
     // TODO: POST Program and register name
+    
     //@ts-ignore
-    navigation.navigate("Exercices");
+    navigation.navigate("Builder");
   }
 
     return (
@@ -65,7 +63,8 @@ export default function ProgramCreationScreen() {
       color: "white",
     },
     centered: {
-      alignItems: "center"
+      alignItems: "center",
+      marginTop: 20,
     },
     form: {
       marginTop: 20,
@@ -74,7 +73,6 @@ export default function ProgramCreationScreen() {
       textTransform: "uppercase",
       alignSelf: "center",
       fontSize: 17,
-      fontWeight: "500",
       marginBottom: 15
     }
   });

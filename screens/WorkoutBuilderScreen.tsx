@@ -44,9 +44,10 @@ export default function WorkoutBuilderScreen() {
           </View>
           <View style={[styles.centered]}>
             <PlusButton onPress={() => navigation.goBack()}/>
+            
             <PrimaryButton 
-                onPress={patchWorkout} 
-                title='Terminer la séance' 
+                onPress={patchWorkout}
+                title='Terminer la séance'
                 color="#364d53" 
                 textStyle={{color: "white"}}
             />

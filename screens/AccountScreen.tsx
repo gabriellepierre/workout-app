@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Title from '../components/shared/Title';
 import PrimaryButton from '../components/shared/PrimaryButton';
+import Layout from '../components/layouts/Layout';
 
 export default function AccountScreen() {
     const title = "Workout";
@@ -12,27 +13,29 @@ export default function AccountScreen() {
         console.log("logged out");
     }
     return (
-      <View style={styles.container}>
-        <Title title={title} subtitle={subtitle} />
-        <View >
-            <View style={styles.flexed}>
-                <Text style={styles.properties}>Pseudo :</Text>
-                <Text style={styles.userData}>User pseudo</Text>
+        <Layout>
+        <View style={styles.container}>
+            <Title title={title} subtitle={subtitle} />
+            <View >
+                <View style={styles.flexed}>
+                    <Text style={styles.properties}>Pseudo :</Text>
+                    <Text style={styles.userData}>User pseudo</Text>
+                </View>
+                <View style={styles.flexed}>
+                    <Text style={styles.properties}>Email :</Text>
+                    <Text style={styles.userData}>user.pseudo@email.com</Text>
+                </View>
+                <View style={styles.flexed}>
+                    <Text style={styles.properties}>Nombre de séance :</Text>
+                    <Text style={styles.userData}>20</Text>
+                </View>
             </View>
-            <View style={styles.flexed}>
-                <Text style={styles.properties}>Email :</Text>
-                <Text style={styles.userData}>user.pseudo@email.com</Text>
+            <View style={styles.centered}>
+                <PrimaryButton onPress={logOut} title="Se déconnecter" color="#c91a07"/>
             </View>
-            <View style={styles.flexed}>
-                <Text style={styles.properties}>Nombre de séance :</Text>
-                <Text style={styles.userData}>20</Text>
-            </View>
-        </View>
-        <View style={styles.centered}>
-            <PrimaryButton onPress={logOut} title="Se déconnecter" color="#c91a07"/>
-        </View>
 
-      </View>
+        </View>
+      </Layout>
     )
   };
   

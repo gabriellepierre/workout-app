@@ -4,16 +4,17 @@ import SearchScreen from "../screens/SearchScreen";
 import WorkoutNavigation from './WorkoutNavigation';
 import ProgramRecapScreen from '../screens/ProgramRecapScreen';
 import ProgramCreationScreen from '../screens/ProgramCreationScreen';
+import ProgramNavigation from './ProgramNavigation';
 
 export default function HomeNavigation() {
   const Stack = createStackNavigator();
   return (
-      <Stack.Navigator initialRouteName="Home" screenOptions={{
+      <Stack.Navigator initialRouteName="HomeScreen" screenOptions={{
         headerShown: false,}}>
         <Stack.Screen name="HomeScreen" component={HomeScreen}/>
         <Stack.Screen name="Research" component={SearchScreen}/>
         <Stack.Screen name="ProgramRecap" component={ProgramRecapScreen}/>
-        <Stack.Screen name="Program" component={ProgramCreationScreen}/>
+        <Stack.Screen name="Program" component={ProgramNavigation}/>
         <Stack.Screen name="Workout" component={WorkoutNavigation}/>
       </Stack.Navigator>
   )

@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     maxHeight: 150,
     overflow: 'scroll',
-    zIndex: 1,
+    zIndex: 10,
   },
   optionButton: {
     padding: 10,

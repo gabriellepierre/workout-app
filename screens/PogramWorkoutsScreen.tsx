@@ -10,7 +10,7 @@ import ComboBox from '../components/shared/ComboBox';
 import { PROGRAM_OBJECTIVE } from '../model/program/Objective';
 import { PROGRAM_LEVEL } from '../model/program/Level';
 
-export default function ProgramWorkoutScreen() {
+export default function ProgramWorkoutsScreen() {
 
   // TODO remplacer program par le vrai programme
   const programNumber = programs.length;
@@ -39,21 +39,7 @@ export default function ProgramWorkoutScreen() {
       <Layout>
         <View style={styles.container}>
           <Title title={ProgramName} subtitle="Propriétés du programme"/>
-          <View style={styles.form}>
-            <Text style={styles.propTitle}>Nommez votre programme</Text>
-            <PrimaryInput dark={false} onWrite={setProgramName} placeholderText={ProgramName}/>
-          </View>
-          <View style={styles.form}>
-            <Text style={styles.propTitle}>Niveau</Text>
-            <ComboBox onSelect={setProgramLevel} options={levels}/>
-          </View>
-          <View style={styles.form}>
-            <Text style={styles.propTitle}>Objectif du programme</Text>
-            <ComboBox onSelect={setProgramObjective} options={objectives}/>
-          </View>
-          <View style={styles.centered}>
-            <PrimaryButton onPress={postProgram} title='Valider' color="#364d53" textStyle={{color: "white"}}/>
-          </View>
+
         </View>
       </Layout>
     )
@@ -75,7 +61,6 @@ export default function ProgramWorkoutScreen() {
       textTransform: "uppercase",
       alignSelf: "center",
       fontSize: 17,
-      fontWeight: "500",
       marginBottom: 15
     }
   });

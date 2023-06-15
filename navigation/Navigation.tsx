@@ -13,15 +13,13 @@ export default function Navigation() {
         setUserAccess("Business")
     }
     return (
-        <NavigationContainer>
-            <Stack.Navigator 
-                initialRouteName={userAccess} 
-                screenOptions={{ headerShown: false,}}
-            >
-                <Stack.Screen name="Connexion" component={ConnexionNavigation}/>
-            
-                <Stack.Screen name="Business" component={BusinessNavigation}/>
-            </Stack.Navigator>
-        </NavigationContainer>
+        <Stack.Navigator 
+            initialRouteName={userAccess} 
+            screenOptions={{ headerShown: false,}}
+        >
+            <Stack.Screen name="Connexion" component={ConnexionNavigation}/>
+        
+            <Stack.Screen name="Business" component={BusinessNavigation}/>
+        </Stack.Navigator>
     )
 }

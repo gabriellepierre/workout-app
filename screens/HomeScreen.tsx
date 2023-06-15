@@ -114,10 +114,6 @@ const userWorkouts = [];
           
         </View>
         {/* #endregion User's program */}
-
-        <View style={styles.centered}>
-          <PlusButton onPress={createWorkout}/>
-        </View>
       </View>
     </Layout>
   )

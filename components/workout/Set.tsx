@@ -1,25 +1,37 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Card } from 'react-native-paper';
-
-import { SetType } from '../../model/workout/SetType';
+import { StyleSheet, View, Text } from 'react-native';
+import { Card, TextInput } from 'react-native-paper';
 
 interface SetProps {
-  set: SetType,
+  number: number;
+  setRep: () => void;
+  setWeight: () => void;
 }
 
-const Set: React.FC<SetProps> = ({ set }) => {
+const Set = ({props}: {props: SetProps}) => {
   return (
     <Card style={styles.card}>
       <View>
-        {set.setNumber}
+        <Text>{props.number}</Text>
       </View>
       <View>
-        {set.reps}
+        <TextInput
+          style={styles.textSetInput}
+          placeholder=""
+          placeholderTextColor=""
+          onChangeText={props.setRep}
+        />
       </View>
       <View>
-        {set.weight}
+        <TextInput
+          style={styles.textSetInput}
+          placeholder=""
+          placeholderTextColor=""
+          onChangeText={props.setWeight}
+        />
       </View>
+      
+      
     </Card>
   );
 };
@@ -29,53 +41,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: "#364d53"
   },
-  title: {
-    fontSize: 20,
-    color: "white",
-    textTransform: "uppercase",
-    // display: "inline-flex",
-  },
-  justifiedContent: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  bodyPart: {
-    fontSize: 15,
-    color: "white",
-  },
-  setSection: {
-    marginTop: 20,
-    flex: 4,
-    marginHorizontal: "auto",
-  },
-  setTitleSection: {
-    flexDirection: "row",
-    paddingBottom: 10
-  },
-  setTitle: {
-    fontWeight: "bold",
-    color: "white",
-  },
-  setParamsSection: {
+  textSetInput: {
+    backgroundColor: "white",
+    borderRadius: 15,
 
-  },
-  setNumber: {
-
-  },
-  addSetButton: {
-
-  },
-  deleteSetButton: {
-
-  },
-  setParamInput: {
-
-  },
-  gridContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
+  }
 });
 
 export default Set;

@@ -5,6 +5,8 @@ import { Card } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import Exercise from './Exercise';
 import { ExerciseType } from '../../model/workout/ExerciseType';
+import { exercises } from '../../data/ExercisesData';
+import Set from './Set';
 
 interface SetsCardProps {
   exercise: ExerciseType;
@@ -34,21 +36,29 @@ const SetsCard: React.FC<SetsCardProps> = ({ exercise, style }) => {
         {open && (
             <View style={styles.setSection}>
                  {/* <FlatList
-                    data={data}
+                    data={exercises}
                     renderItem={({ item }) => {
                         {item.name}
                     }}
                     keyExtractor={(item, index) => index.toString()}
                     numColumns={4}
                     contentContainerStyle={styles.gridContainer}
-                /> */}
+                  /> */}
                 <View style={styles.setTitleSection}>
                     <Text style={styles.setTitle}>Série</Text>
                     <Text style={styles.setTitle}>Répétitions</Text>
                     <Text style={styles.setTitle}>Poids (kg)</Text>
                 </View>
                 <View>
-                  
+                  {/* <FlatList
+                    data={exercises}
+                    renderItem={({ item }) => {
+                        // <Set 
+                    }}
+                    keyExtractor={(item, index) => index.toString()}
+                    numColumns={4}
+                    contentContainerStyle={styles.gridContainer}
+                /> */}
                 </View>
             </View>
         )}
