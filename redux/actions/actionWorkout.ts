@@ -75,7 +75,7 @@ import {SET_WORKOUT_NAME, SET_WORKOUT_AUTHOR, SET_WORKOUT_EXERCISES} from '../co
       //Then perform your asynchronous operations.
       try {
         const workoutPromise = await fetch(url, {
-          method: "GET",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
@@ -99,11 +99,34 @@ import {SET_WORKOUT_NAME, SET_WORKOUT_AUTHOR, SET_WORKOUT_EXERCISES} from '../co
       //Then perform your asynchronous operations.
       try {
         const workoutPromise = await fetch(url + `${id}`, {
-          method: "GET",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(workoutToUpdate),
+        });
+        //Then use the json method to get json data from api/
+        const workoutJson = await workoutPromise.json();
+        dispatch(setAuthor(workoutJson.author), setName(workoutJson.name), setExercises(workoutJson.exercises));
+        return workoutPromise.json(); // parses JSON response into native JavaScript objects
+      } catch (error) {
+        console.log('Error---------', error);
+        //You can dispatch to another action if you want to display an error message in the application
+        //dispatch(fetchDataRejected(error))
+      }
+    }
+  }
+
+  export const deleteWorkout = (id: string) => {
+    //In order to use await your callback must be asynchronous using async keyword.
+    return async dispatch => {
+      //Then perform your asynchronous operations.
+      try {
+        const workoutPromise = await fetch(url + `${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
         //Then use the json method to get json data from api/
         const workoutJson = await workoutPromise.json();
