@@ -8,24 +8,11 @@ import { useState } from 'react';
 
 import { View, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { Checkbox } from 'react-native-paper';
+
+import {useDispatch, useSelector} from 'react-redux';
+import {getAllExercises} from "../redux/actions/actionExercises";
+import {useEffect} from 'react';
 import { exercises } from '../data/ExercisesData';
-
-
-// const data = [
-//   { id: 1, title: 'Développé couché', bodyPart: 'pectoraux' },
-//   { id: 2, title: 'Soulevé de terre', bodyPart: 'Bas du corps' },
-//   { id: 3, title: 'Squat', bodyPart: 'Bas du corps' },
-//   { id: 4, title: 'Hip trust', bodyPart: 'Fessiers' },
-//   { id: 5, title: 'Développé couché', bodyPart: 'pectoraux' },
-//   { id: 6, title: 'Soulevé de terre', bodyPart: 'Bas du corps' },
-//   { id: 7, title: 'Squat', bodyPart: 'Bas du corps' },
-//   { id: 8, title: 'Hip trust', bodyPart: 'Fessiers' },
-//   { id: 9, title: 'Développé couché', bodyPart: 'pectoraux' },
-//   { id: 10, title: 'Soulevé de terre', bodyPart: 'Bas du corps' },
-//   { id: 11, title: 'Squat', bodyPart: 'Bas du corps' },
-//   { id: 12, title: 'Hip trust', bodyPart: 'Fessiers' },
-//   // TODO Ajoutez les autres éléments de votre carrousel
-// ];
 
 export default function WorkoutExercicesScreen() {
 
@@ -33,11 +20,23 @@ export default function WorkoutExercicesScreen() {
 
   const navigation = useNavigation();
 
-  function workoutNaming() {
-    // TODO: register email
-  }
+  // @ts-ignore
+  const getExercises = useSelector(state => state.exerciseReducer);
+  // Create a const that will hold the react-redux events dispatcher
+  const dispatch = useDispatch();
+  
+  // Let's define a hook that will be used to update the rendered state after the return will be called
+  // You cannot perform side-effects outside of a useEffect hook
+  useEffect(() => {
+    const loadExercises = async () => {
+      // @ts-ignore
+      await dispatch(getAllExercises());
+    };
+    // mettre stub en reponse
+    loadExercises();
+  }, [dispatch]);
 
-  function handleWorkoutTitle () {
+  function handleWorkoutExercises () {
     // TODO: POST workout and register name
     //@ts-ignore
     navigation.navigate("Builder");
@@ -72,6 +71,7 @@ export default function WorkoutExercicesScreen() {
           <View style={styles.list}>
               <FlatList
                 data={exercises}
+                showsVerticalScrollIndicator={false}
                 keyExtractor={(item) => item._id}
                 renderItem={({ item }) => (
                   <TouchableOpacity onPress={() => toggleItem(item._id)}>
@@ -85,7 +85,7 @@ export default function WorkoutExercicesScreen() {
               />
           </View>
           <View style={[styles.centered]}>
-            <PrimaryButton onPress={handleWorkoutTitle} title='Ajouter à la séance' color="#364d53" textStyle={{color: "white"}}/>
+            <PrimaryButton onPress={handleWorkoutExercises} title='Ajouter à la séance' color="#364d53" textStyle={{color: "white"}}/>
           </View>
         </View>
       </Layout>

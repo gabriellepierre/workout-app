@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Title from '../components/shared/Title';
 import Layout from '../components/layouts/Layout';
@@ -5,25 +6,47 @@ import PrimaryInput from '../components/shared/PrimaryInput';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSelector, useDispatch } from 'react-redux';
+import { setEmail, setPassword, setPseudo, addUser } from '../redux/actions/actionUser';
 
 export default function SignInScreen() {
   const navigation = useNavigation();
-  function emailInput() {
-    // TODO: register email
+  const [userState, setUserState] = useState({});
+  const [isError, setIsError] = useState(false);
+
+  // @ts-ignore
+  const { email, pseudo, password } = useSelector(state => state.userReducer);
+  const dispatch = useDispatch();
+
+  const handleEmail = (e) => {
+    // dispatch(setEmail(e.target.value));
+  };
+
+  const handlePseudo = (e) => {
+    // TODO: register pseudo
+    // dispatch(setPseudo(e.target.value));
   }
 
-  function usernameInput() {
-    // TODO: register email
-  }
-
-  function pwdInput() {
-    // TODO: register email
+  const handlePassword= (e) => {
+    // TODO: register pwd
+    // dispatch(setPassword(e.target.value));
   }
 
   function handleSignIn () {
+    setUserState({email, pseudo, password});
     // TODO: sign in
+    if(userState) {
+      // dispatch(addUser(userState));
+      // // TODO verify that the user does not already exist
+      // console.log('Email:', userState.email);
+      // console.log('PSEUDO:', userState.pseudo);
+
     //@ts-ignore
     navigation.navigate("Home");
+    } else {
+      console.log("User's props aren't set properly");
+      setIsError(true);
+    }
   }
 
     return (
@@ -31,20 +54,28 @@ export default function SignInScreen() {
         <View style={styles.container}>
           <Title title='Workout' subtitle='Création de compte' dark={true}/>
           <View style={styles.form}>
-            <PrimaryInput dark={true} onWrite={emailInput} placeholderText="EMAIL"/>
-            <PrimaryInput dark={true} onWrite={usernameInput} placeholderText="PSEUDO"/>
-            <PrimaryInput dark={true} onWrite={pwdInput} placeholderText="MOT DE PASSE"/>
+            <PrimaryInput dark={true} onWrite={handleEmail} placeholderText="EMAIL"/>
+            <PrimaryInput dark={true} onWrite={handlePseudo} placeholderText="PSEUDO"/>
+            <PrimaryInput dark={true} onWrite={handlePassword} placeholderText="MOT DE PASSE" secureTextEntry={true}/>
+            {isError &&
+              <View style={styles.error}>
+                <Text style={{color: "#de7a6f", fontSize: 16, fontWeight:'500'}}>Nous n'avons pas réussi à vous inscrire.</Text>
+              </View>
+            }
           </View>
+          
           <View style={styles.centered}>
             <PrimaryButton onPress={handleSignIn} title="S'inscrire" color="white" textStyle={{color: "black"}}/>
             <TouchableOpacity onPress={navigation.goBack}>
               <Text style={styles.signIn}> Ou se connecter</Text>
             </TouchableOpacity>
           </View>
+          
           <View style={[styles.centered, {marginVertical: 100} ]}>
             <Ionicons name="barbell-outline" size={50} color="white" />
           </View>
         </View>
+        
       </Layout>
     )
   };
@@ -65,6 +96,14 @@ export default function SignInScreen() {
       textTransform: "uppercase",
       marginVertical: 20,
       textDecorationLine: "underline"
-    }
+    },
+    error:{
+      justifyContent: "flex-end",
+      width: "120%",
+      color: "white",
+      padding: 15,
+      alignItems: "center",
+      margin: -20
+    },
   });
   

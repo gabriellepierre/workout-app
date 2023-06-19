@@ -37,6 +37,8 @@ const SetsCard: React.FC<SetsCardProps> = ({ exercise, style }) => {
             <View style={styles.setSection}>
                  {/* <FlatList
                     data={exercises}
+                    
+                    showsVerticalScrollIndicator={false}
                     renderItem={({ item }) => {
                         {item.name}
                     }}

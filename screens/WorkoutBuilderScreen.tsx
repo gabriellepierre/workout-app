@@ -36,6 +36,7 @@ export default function WorkoutBuilderScreen() {
           <View style={styles.list}>
               <FlatList
                 data={exercises}
+                showsVerticalScrollIndicator={false}
                 keyExtractor={(item) => item._id}
                 renderItem={({ item }) => (
                     <SetsCard exercise={item} style={true} />

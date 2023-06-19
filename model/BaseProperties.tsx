@@ -1,5 +1,5 @@
 export interface BaseProperties {
-    _id: string;
+    _id?: string;
     updatedAt?: string;
     createdAt?: string;
   }

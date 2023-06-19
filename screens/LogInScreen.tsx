@@ -5,10 +5,12 @@ import PrimaryInput from '../components/shared/PrimaryInput';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function LogInScreen() {
 
   const navigation = useNavigation();
+
   function emailInput() {
     // TODO: register email
   }
@@ -33,7 +35,7 @@ export default function LogInScreen() {
           <Title title='Workout' subtitle='Se connecter' dark={true}/>
           <View style={styles.form}>
             <PrimaryInput dark={true} onWrite={emailInput} placeholderText="EMAIL"/>
-            <PrimaryInput dark={true} onWrite={pwdInput} placeholderText="MOT DE PASSE"/>
+            <PrimaryInput dark={true} onWrite={pwdInput} placeholderText="MOT DE PASSE" secureTextEntry={true}/>
           </View>
           <View style={styles.centered}>
             <PrimaryButton onPress={handleLogIn} title='Se connecter' color="white" textStyle={{color: "black"}}/>

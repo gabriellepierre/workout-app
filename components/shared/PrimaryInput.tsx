@@ -6,9 +6,10 @@ interface PrimaryInputProps {
   dark: boolean;
   placeholderText: string;
   style?: ViewStyle;
+  secureTextEntry?: boolean;
 }
 
-const PrimaryInput: React.FC<PrimaryInputProps> = ({ onWrite, dark, placeholderText,style }) => {
+const PrimaryInput: React.FC<PrimaryInputProps> = ({ onWrite, dark, placeholderText,style, secureTextEntry }) => {
   const [textValue, setTextValue] = useState('');
   const textStyle = [styles.textInput, style];
 
@@ -34,6 +35,7 @@ const PrimaryInput: React.FC<PrimaryInputProps> = ({ onWrite, dark, placeholderT
           placeholderTextColor={placeholderColor}
           onChangeText={setTextValue}
           onSubmitEditing={handleInput}
+          secureTextEntry={secureTextEntry}
         />
       </View>
   );

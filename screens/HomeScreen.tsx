@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Title from '../components/shared/Title';
 import SearchButton from '../components/search/SearchButton';
 import Subtitle from '../components/shared/Subtitle';
@@ -8,12 +8,13 @@ import { useState } from 'react';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import { useNavigation } from '@react-navigation/native';
 import Layout from '../components/layouts/Layout';
-import PlusButton from '../components/shared/PlusButton';
 import { workouts } from '../data/WorkoutData';
 
 export default function HomeScreen() {
   const title = "Workout";
   const subtitle = "Suit tes progrès";
+
+  const navigation = useNavigation();
 
   // TODO : const user ; avec le user logué
 
@@ -22,12 +23,10 @@ export default function HomeScreen() {
   const myWorkouts= "Mes séances";
 
   //TODO : add workout data in userWorkouts
-  // const userWorkouts = workouts?.filter(e => e.author === "gabrielle.pierre19@gmail.com");
-const userWorkouts = [];
-  const [hasWorkouts, setHasWorkouts] = useState(true); // TODO default to false when linked to db
+  // const userWorkouts = workouts?.filter(e => e.author === user.email);
+  const [hasWorkouts, setHasWorkouts] = useState(false);
 
-  const navigation = useNavigation();
-
+  const userWorkouts = [];
 
   if (userWorkouts.length > 0) {
     setHasWorkouts(true);
@@ -50,21 +49,19 @@ const userWorkouts = [];
   // #region Program
   const myProgram= "Reprendre le programme";
   const [hasProgram, setHasProgram] = useState(true); // default to false when linked to db
+  // const userProgram = user.program;
+  const userProgram = "187651";
 
-  const userProgram = [];
-
-  if (userWorkouts.length > 0) {
-    setHasProgram(true);
-  }
-
+  // if (userProgram !== null) {
+  //   setHasProgram(true);  
+  // }
 
   function goToProgram() {
     //@ts-ignore
-    navigation.navigate("ProgramRecap");
-    // TODO: navigate to program
-    // navigation.navigate("Program");
-  }
+    navigation.navigate('ProgramRecap', userProgram);
 
+    // TODO: navigate to program
+  }
   // #endregion Program
 
   function toSearchScreen() {
@@ -72,7 +69,6 @@ const userWorkouts = [];
     navigation.navigate("Research");
 
   }
-
 
   return (
     <Layout>

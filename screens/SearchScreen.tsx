@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import Title from '../components/shared/Title';
 import {useState} from 'react';
 import SearchBar from '../components/search/SearchBar';
@@ -7,17 +7,16 @@ import PrimaryButton from '../components/shared/PrimaryButton';
 import { FontAwesome } from "@expo/vector-icons";
 import FilterModal from '../components/search/FilterModal';
 import { useNavigation } from '@react-navigation/native';
+import ProgramSearched from '../components/search/ProgramSearched';
+import { programs } from '../data/ProgramData';
+import { ProgramType } from '../model/program/ProgramType';
 
 export default function SearchScreen() {
     const title = "Workout";
-    const subtitle = "Rechercher un programme ou une séance";
+    const subtitle = "Rechercher un programme";
     // Todo : replace the raw data with user data
 
     const navigation = useNavigation();
-
-    function search() {
-        console.log("searching...");
-    }
 
     const handleSearch = (searchText: string) => {
         console.log('Recherche effectuée:', searchText);
@@ -37,6 +36,11 @@ export default function SearchScreen() {
         // @ts-ignore
         navigation.navigate("Program");
       }
+
+      const gotToProgram = (item: ProgramType) => {
+        // @ts-ignore
+        navigation.navigate('ProgramRecap', item);
+      };
     
     return (
       <Layout>
@@ -55,6 +59,20 @@ export default function SearchScreen() {
           {openFilter && 
             <FilterModal visible={openFilter} onClose={() => setOpenFilter(false)}/>
           }
+
+        <FlatList
+          data={programs}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item._id}
+          renderItem={({ item  } : {item: ProgramType}) => (
+            
+            <TouchableOpacity onPress={() => gotToProgram(item)}>
+              <ProgramSearched program={item} />
+            </TouchableOpacity>
+          )}
+        />
+          
+
           <View style={styles.centered}>
             <View>
               <PrimaryButton title="Créer un programme" onPress={createProgram} />
