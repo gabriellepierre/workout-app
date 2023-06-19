@@ -16,6 +16,7 @@ export const GET_EXERCISE_BY_NAME = 'setUserPseudo';
 
 
 // #region Workout
+export const ADD_WORKOUT = 'addWorkout';
 export const SET_WORKOUT_NAME = 'setWorkoutName';
 export const SET_WORKOUT_AUTHOR = 'setWorkoutAuthor';
 export const SET_WORKOUT_EXERCISES = 'setWorkoutExercises';
