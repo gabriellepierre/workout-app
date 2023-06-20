@@ -12,7 +12,6 @@ import { Checkbox } from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAllExercises} from "../redux/actions/actionExercises";
 import {useEffect} from 'react';
-import { exercises } from '../data/ExercisesData';
 
 export default function WorkoutExercicesScreen() {
 
@@ -21,19 +20,16 @@ export default function WorkoutExercicesScreen() {
   const navigation = useNavigation();
 
   // @ts-ignore
-  const getExercises = useSelector(state => state.exerciseReducer);
-  // Create a const that will hold the react-redux events dispatcher
+  const exerciseList = useSelector(state => state.appReducer.exercise);
   const dispatch = useDispatch();
-  
-  // Let's define a hook that will be used to update the rendered state after the return will be called
-  // You cannot perform side-effects outside of a useEffect hook
+
   useEffect(() => {
-    const loadExercises = async () => {
-      // @ts-ignore
+    const loadExercise = async () => {
+    // @ts-ignore
       await dispatch(getAllExercises());
     };
-    // mettre stub en reponse
-    loadExercises();
+    loadExercise();
+
   }, [dispatch]);
 
   function handleWorkoutExercises () {
@@ -70,7 +66,7 @@ export default function WorkoutExercicesScreen() {
           </View>
           <View style={styles.list}>
               <FlatList
-                data={exercises}
+                data={exerciseList.exerciseList}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={(item) => item._id}
                 renderItem={({ item }) => (

@@ -8,9 +8,7 @@ export const SET_USER_PROGRAM = 'setUserProgram';
 
 // #region Exercises
 export const SET_EXERCISES_LIST = 'setExercisesList';
-export const GET_ALL_EXERCISES = 'setUserEmail';
-export const GET_EXERCISE_BY_MUSCLE = 'setUserPassword';
-export const GET_EXERCISE_BY_NAME = 'setUserPseudo';
+export const GET_ALL_EXERCISES = 'getAllExercises';
 // #endregion Exercises
 
 
