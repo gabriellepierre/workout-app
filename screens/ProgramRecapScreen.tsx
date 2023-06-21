@@ -6,30 +6,51 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { users } from '../data/UserData';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProgramByID } from '../redux/actions/actionProgram';
 import { programs } from '../data/ProgramData';
+import { getUsers, setUserProgram } from '../redux/actions/actionUser';
+import {useEffect} from 'react';
+import { getAllPrograms } from '../redux/actions/actionProgram';
 
 
 export default function ProgramRecapScreen() {
   const navigation = useNavigation();
 
    // @ts-ignore
-   const { program } = useSelector(state => state.program);
+   const allPrograms = useSelector(state => state.appReducer.program);
+   console.log(allPrograms);
    const dispatch = useDispatch();
 
   // @ts-ignore
   const route = useRoute<RouteProp<RootStackParamList, 'ProgramRecap'>>();
   const programId = route.params;
-  // const programDetail = dispatch(getProgramByID(programId));
+
   const programDetail = programs.find(p => p._id === programId);
 
-  // console.log(programDetail);
-
-  // TODO remplacer users par les vrais users
+  // @ts-ignore
+  const {usersList, user} = useSelector(state => state.appReducer.user);
+  console.log(usersList);
   const numberOfUsers = users.filter(user => user.program === programDetail._id).length;
+
+  useEffect(() => {
+    const loadProgram = async () => {
+    // @ts-ignore
+      await dispatch(getAllPrograms());
+    };
+
+    const loadUsers = async () => {
+      // @ts-ignore
+        await dispatch(getUsers());
+      };
+      
+    loadUsers();
+
+    loadProgram();
+
+  }, [dispatch]);
 
   function chooseProgram() {
     // Get the user, and add the program to it
+    dispatch(setUserProgram(programId));
     //@ts-ignore
     navigation.navigate("HomeScreen");
   }

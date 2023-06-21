@@ -1,5 +1,6 @@
-import { UserType } from '../../model/user/UserType';
-import { SET_PROGRAM_LEVEL, SET_PROGRAM_NAME, SET_PROGRAM_OBJECTIVE } from '../constants';
+import { programs } from '../../data/ProgramData';
+import { ProgramType } from '../../model/program/ProgramType';
+import { GET_ALL_PROGRAMS, SET_ALL_PROGRAMS, SET_PROGRAM_LEVEL, SET_PROGRAM_NAME, SET_PROGRAM_OBJECTIVE } from '../constants';
 
 export const setProgramName = (name: string) => {
     return {
@@ -22,24 +23,48 @@ export const setProgramName = (name: string) => {
     };
   };
 
+  export const setAllPrograms = (allPrograms: ProgramType[]) => {
+    return {
+      type: SET_ALL_PROGRAMS,
+      payload: allPrograms,
+    };
+  };
+
   const url = process.env.API_URL + "/programs";
 
-  export const getProgramByID = (id: string) => {
+  export const getAllPrograms = () => {
+    return async dispatch => {
+      try {
+        // const userPromise = await fetch(url + `/${id}`, {
+        //   method: "GET",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   }
+        // });
+        // dispatch(setAllPrograms(programs));
+      dispatch({
+        type: GET_ALL_PROGRAMS,
+        payload: programs,
+      });
+      } catch (error) {
+        console.log('Error---------', error);
+
+        // En cas d'erreur, dispatch une action d'échec
+        // dispatch({
+        //   type: USERS_ERROR,
+        //   payload: error.message,
+        // });
+      }
+    }
+  }
+
+  export const getProgramById = (id: string) => {
     //In order to use await your callback must be asynchronous using async keyword.
     return async dispatch => {
       //Then perform your asynchronous operations.
       try {
-        const userPromise = await fetch(url + `/${id}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          }
-        });
-        //Then use the json method to get json data from api/
-        const userJson = await userPromise.json();
-        console.log(userJson);
-        dispatch(userJson);
-        // return userJson;
+        const allPrograms = await dispatch(getAllPrograms());
+        const program = allPrograms.filter(p => p.id === id);
       } catch (error) {
         console.log('Error---------', error);
         //You can dispatch to another action if you want to display an error message in the application

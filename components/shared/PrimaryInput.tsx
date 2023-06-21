@@ -23,6 +23,11 @@ const PrimaryInput: React.FC<PrimaryInputProps> = ({ onWrite, dark, placeholderT
     // textStyle.push({ borderColor: "#4e5a65", });
   }
 
+  const onChangeValue = (e) => {
+    setTextValue(e);
+    onWrite(textValue);
+  };
+
   const handleInput = () => {
     onWrite(textValue);
   };
@@ -34,6 +39,7 @@ const PrimaryInput: React.FC<PrimaryInputProps> = ({ onWrite, dark, placeholderT
           placeholder={placeholderText}
           placeholderTextColor={placeholderColor}
           onChangeText={setTextValue}
+          onEndEditing={onChangeValue}
           onSubmitEditing={handleInput}
           secureTextEntry={secureTextEntry}
         />

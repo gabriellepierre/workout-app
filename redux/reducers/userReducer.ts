@@ -1,38 +1,54 @@
-import { ADD_USER, SET_USER_EMAIL, SET_USER_PASSWORD, SET_USER_PSEUDO } from "../constants";
+import { users } from "../../data/UserData";
+import { UserType } from "../../model/user/UserType";
+import { ADD_USER, GET_USERS, SET_USER_PROGRAM, USER_ERROR } from "../constants";
+import uuid from 'react-native-uuid';
 
-const initialState = {
+interface UserState {
+  user: UserType,
+  usersList: UserType[];
+  error: any;
+}
+
+const initialState: UserState = {
+  user: {
     email: '',
     password: '',
-    pseudo: ''
-  };
+    pseudo: '',
+  },
+  usersList: users,
+  error: null
+};
   
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action) : UserState => {
     switch (action.type) {
-      case SET_USER_EMAIL:
+      case GET_USERS: 
         return {
           ...state,
-          email: action.payload,
+          usersList: action.payload,
         };
-      case SET_USER_PASSWORD:
+      case ADD_USER:
+        const newUser: UserType = {
+          ...action.payload,
+          _id: uuid.v4(),
+        };
         return {
           ...state,
-          password: action.payload,
+          usersList: [...state.usersList, newUser],
         };
-    case SET_USER_PSEUDO:
+      case SET_USER_PROGRAM: 
         return {
           ...state,
-          pseudo: action.payload,
+          user: {...state.user, program: action.payload},
         };
-    case ADD_USER:
+        // ERROR CASE
+      case USER_ERROR: 
         return {
-            ...state,
-            email: action.payload.email,
-            pseudo: action.payload.pseudo,
-            password: action.payload.password,
-        };
+          ...state,
+          error: action.payload
+        }
       default:
         return state;
-    }
+      }
   };
   
   export default userReducer;

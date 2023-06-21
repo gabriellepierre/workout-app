@@ -37,7 +37,7 @@ export default function SearchScreen() {
         navigation.navigate("Program");
       }
 
-      const gotToProgram = (item: ProgramType) => {
+      const gotToProgram = (item: string) => {
         // @ts-ignore
         navigation.navigate('ProgramRecap', item);
       };
@@ -66,7 +66,7 @@ export default function SearchScreen() {
           keyExtractor={(item) => item._id}
           renderItem={({ item  } : {item: ProgramType}) => (
             
-            <TouchableOpacity onPress={() => gotToProgram(item)}>
+            <TouchableOpacity onPress={() => gotToProgram(item._id)}>
               <ProgramSearched program={item} />
             </TouchableOpacity>
           )}

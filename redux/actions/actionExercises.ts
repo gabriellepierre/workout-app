@@ -17,11 +17,6 @@ export const getAllExercises = () => {
     return async dispatch => {
       //Then perform your asynchronous operations.
       try {
-        // const exercisesPromise = await fetch(url, options);
-        // const exercisesListJson = await exercisesPromise.json();
-
-        // const exercisesList = exercisesListJson.filter(//);
-        // const exercisesList: ExerciseType[] = exercises.map(elt => elt);
         dispatch(setExercisesList(exercises));
       } catch (error) {
         console.log('Error with exercise API ---------', error);

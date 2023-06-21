@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Title from '../components/shared/Title';
 import Layout from '../components/layouts/Layout';
@@ -5,24 +6,38 @@ import PrimaryInput from '../components/shared/PrimaryInput';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { UserType } from '../model/user/UserType';
 
 export default function LogInScreen() {
 
   const navigation = useNavigation();
+  const [userConnexion, setUserConnexion] = useState<UserType>();
+  const [isError, setIsError] = useState(false);
 
-  function emailInput() {
-    // TODO: register email
+
+  // @ts-ignore
+  const {usersList} = useSelector(state => state.appReducer.user);
+  console.log(usersList);
+  console.log(userConnexion);
+
+  function emailInput(e) {
+    setUserConnexion({...userConnexion, email: e})
+  }
+
+  function pwdInput(e) {
+    setUserConnexion({...userConnexion, password: e})
   }
 
   function handleLogIn () {
-    // TODO: log in
-    //@ts-ignore
-    navigation.navigate("Home");
-  }
-
-  function pwdInput() {
-    // TODO: register password
+    const isRegistered = usersList.filter(user => user.email === userConnexion.email && user.password === userConnexion.password);
+    console.log(isRegistered);
+    if(isRegistered.length > 0) {
+      //@ts-ignore
+      navigation.navigate("Home");
+    } else {
+      setIsError(true);
+    }
   }
 
   function toSignInScreen() {
@@ -36,6 +51,11 @@ export default function LogInScreen() {
           <View style={styles.form}>
             <PrimaryInput dark={true} onWrite={emailInput} placeholderText="EMAIL"/>
             <PrimaryInput dark={true} onWrite={pwdInput} placeholderText="MOT DE PASSE" secureTextEntry={true}/>
+            {isError &&
+              <View style={styles.error}>
+                <Text style={{color: "#de7a6f", fontSize: 16, fontWeight:'500'}}>Nous n'avons pas réussi à vous connecter.</Text>
+              </View>
+            }
           </View>
           <View style={styles.centered}>
             <PrimaryButton onPress={handleLogIn} title='Se connecter' color="white" textStyle={{color: "black"}}/>
@@ -67,5 +87,13 @@ export default function LogInScreen() {
       textTransform: "uppercase",
       marginVertical: 20,
       textDecorationLine: "underline"
-    }
+    },
+    error:{
+      justifyContent: "flex-end",
+      width: "120%",
+      color: "white",
+      padding: 15,
+      alignItems: "center",
+      margin: -20
+    },
   });

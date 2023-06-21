@@ -7,42 +7,41 @@ import PrimaryButton from '../components/shared/PrimaryButton';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEmail, setPassword, setPseudo, addUser } from '../redux/actions/actionUser';
+import { addUser } from '../redux/actions/actionUser';
+import { UserType } from '../model/user/UserType';
 
 export default function SignInScreen() {
   const navigation = useNavigation();
-  const [userState, setUserState] = useState({});
+  const [userState, setUserState] = useState<UserType>();
   const [isError, setIsError] = useState(false);
 
   // @ts-ignore
-  const { email, pseudo, password } = useSelector(state => state.userReducer);
+  // const { user } = useSelector(state => state.appReducer.user);
   const dispatch = useDispatch();
 
   const handleEmail = (e) => {
-    // dispatch(setEmail(e.target.value));
+    setUserState({...userState, email: e});
   };
 
   const handlePseudo = (e) => {
     // TODO: register pseudo
-    // dispatch(setPseudo(e.target.value));
+    setUserState({...userState, pseudo: e});
+
   }
 
   const handlePassword= (e) => {
     // TODO: register pwd
-    // dispatch(setPassword(e.target.value));
+    setUserState({...userState, password: e});
   }
 
   function handleSignIn () {
-    setUserState({email, pseudo, password});
-    // TODO: sign in
-    if(userState) {
-      // dispatch(addUser(userState));
-      // // TODO verify that the user does not already exist
-      // console.log('Email:', userState.email);
-      // console.log('PSEUDO:', userState.pseudo);
+    
+    if(userState !== undefined) {
+      // @ts-ignore
+      dispatch(addUser(userState));
 
-    //@ts-ignore
-    navigation.navigate("Home");
+      //@ts-ignore
+      navigation.navigate("Home");
     } else {
       console.log("User's props aren't set properly");
       setIsError(true);
@@ -54,7 +53,7 @@ export default function SignInScreen() {
         <View style={styles.container}>
           <Title title='Workout' subtitle='Création de compte' dark={true}/>
           <View style={styles.form}>
-            <PrimaryInput dark={true} onWrite={handleEmail} placeholderText="EMAIL"/>
+            <PrimaryInput dark={true} onWrite={handleEmail}placeholderText="EMAIL"/>
             <PrimaryInput dark={true} onWrite={handlePseudo} placeholderText="PSEUDO"/>
             <PrimaryInput dark={true} onWrite={handlePassword} placeholderText="MOT DE PASSE" secureTextEntry={true}/>
             {isError &&
