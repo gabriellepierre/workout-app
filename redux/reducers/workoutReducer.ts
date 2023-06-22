@@ -1,29 +1,42 @@
-import { GET_ALL_WORKOUT, GET_WORKOUT_BY_ID, ADD_WORKOUT, UPDATE_WORKOUT, DELETE_WORKOUT, SET_WORKOUT_NAME, SET_WORKOUT_AUTHOR, SET_WORKOUT_EXERCISES } from "../constants";
+import { workouts } from "../../data/WorkoutData";
+import { WorkoutType } from "../../model/workout/WorkoutType";
+import { GET_ALL_WORKOUTS, GET_WORKOUT_BY_ID, ADD_WORKOUT, UPDATE_WORKOUT, DELETE_WORKOUT, SET_WORKOUT_EXERCISES, SET_WORKOUT_ERROR } from "../constants";
+import uuid from 'react-native-uuid';
 
-const initialState = {
-    name: '',
-    author: '',
-    exercises: []
+interface WorkoutState {
+  workout: WorkoutType;
+  workoutList: WorkoutType[];
+  error: any;
+}
+const initialState: WorkoutState = {
+    workout: {
+      name: "",
+    },
+    workoutList: workouts,
+    error: null,
   };
   
-export const workoutReducer = (state = initialState, action) => {
+export const workoutReducer = (state = initialState, action): WorkoutState => {
   switch (action.type) {
-    case SET_WORKOUT_NAME:
+    case UPDATE_WORKOUT: {
+      const { workoutId, newProperty } = action.payload;
       return {
         ...state,
-        name: action.payload,
+        workoutList: state.workoutList.map((workout) =>
+          workout._id === workoutId ? { ...workout, ...newProperty } : workout
+        ),
       };
-    case SET_WORKOUT_AUTHOR:
-      return {
-        ...state,
-        author: action.payload,
-      };
-    case SET_WORKOUT_EXERCISES:
-      return {
-        ...state,
-        exercises: action.payload,
-      };
-    case GET_ALL_WORKOUT:
+    }
+    // case SET_WORKOUT_EXERCISES: {
+    //   const { workoutId, newProperty } = action.payload;
+    //   return {
+    //     ...state,
+    //     workoutList: state.workoutList.map((workout) =>
+    //       workout._id === workoutId ? { ...workout, exercises: {...workout.exercises, newProperty} } : workout
+    //     ),
+    //   };
+    // }
+    case GET_ALL_WORKOUTS:
       return {
         ...state,
         workoutList: action.payload,
@@ -34,25 +47,24 @@ export const workoutReducer = (state = initialState, action) => {
         workout: action.payload,
       };
     case ADD_WORKOUT:
+      const newWorkout: WorkoutType = {
+        ...action.payload,
+        _id: uuid.v4(),
+      };
       return {
         ...state,
-        id: action.payload._id,
-        name: action.payload.name,
-        author: action.payload.author,
-        exercises: action.payload.exercises,
+        workoutList: [...state.workoutList, newWorkout],
       };
-    case UPDATE_WORKOUT:
-      return {
-        ...state,
-        id: action.payload._id,
-        name: action.payload.name,
-        author: action.payload.author,
-        exercises: action.payload.exercises,
-      };
+
     case DELETE_WORKOUT:
       return {
         ...state,
       };
+    case SET_WORKOUT_ERROR : 
+      return {
+        ...state,
+        error: action.payload
+      }
     default:
         return state;
   }

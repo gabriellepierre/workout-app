@@ -1,31 +1,90 @@
+import { workouts } from '../../data/WorkoutData';
 import { ExerciseType } from '../../model/workout/ExerciseType';
 import { WorkoutType } from '../../model/workout/WorkoutType';
-import {SET_WORKOUT_NAME, SET_WORKOUT_AUTHOR, SET_WORKOUT_EXERCISES} from '../constants';
+import { ADD_WORKOUT, DELETE_WORKOUT, GET_ALL_WORKOUTS, SET_WORKOUT_ERROR, UPDATE_WORKOUT } from '../constants';
 
-  export const setName = (name: string) => {
-    return {
-      type: SET_WORKOUT_NAME,
-      payload: name,
-    };
+export const setWorkoutError = (error: any) => {
+  return {
+    type: SET_WORKOUT_ERROR,
+    payload: error,
   };
-  
-  export const setAuthor = (author: string) => {
-    return {
-      type: SET_WORKOUT_AUTHOR,
-      payload: author,
-    };
+}
+
+export const getAllWorkouts = () => {
+  //In order to use await your callback must be asynchronous using async keyword.
+  return async dispatch => {
+    //Then perform your asynchronous operations.
+    try {
+      dispatch({
+        type: GET_ALL_WORKOUTS,
+        payload: workouts
+      });
+      
+    } catch (error) {
+      console.log('Error---------', error);
+      //You can dispatch to another action if you want to display an error message in the application
+      //dispatch(fetchDataRejected(error))
+    }
+  }
+}
+
+export const addWorkout = (workout: WorkoutType) => {
+  return async dispatch => {
+    try {
+      dispatch({
+        type: ADD_WORKOUT,
+        payload: workout,
+      });
+    } catch (error) {
+      console.log('Error---------', error);
+      //You can dispatch to another action if you want to display an error message in the application
+      dispatch(setWorkoutError(error));
+    }
   };
+};
 
-  export const setExercises = (exercises : ExerciseType[]) => {
-    return {
-      type: SET_WORKOUT_EXERCISES,
-      payload: exercises,
-    };
+export const updateWorkout = (workoutId, newProperty) => {
+  return async dispatch => {
+    try {
+      dispatch({
+        type: UPDATE_WORKOUT,
+        payload: {
+          workoutId,
+          newProperty,
+        }
+      });
+    } catch (error) {
+      console.log('Error---------', error);
+      //You can dispatch to another action if you want to display an error message in the application
+      dispatch(setWorkoutError(error));
+    }
   };
+};
 
-  const url = process.env.API_URL + "/workouts";
 
-  export const getAllWorkouts = () => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// #region ACTIONS WITH API
+
+const url = process.env.API_URL + "/workouts";
+
+export const getAllWorkoutsAPI = () => {
     //In order to use await your callback must be asynchronous using async keyword.
     return async dispatch => {
       //Then perform your asynchronous operations.
@@ -38,7 +97,9 @@ import {SET_WORKOUT_NAME, SET_WORKOUT_AUTHOR, SET_WORKOUT_EXERCISES} from '../co
         });
         //Then use the json method to get json data from api/
         const workoutJson = await workoutPromise.json();
+
         dispatch(workoutJson);
+        
       } catch (error) {
         console.log('Error---------', error);
         //You can dispatch to another action if you want to display an error message in the application
@@ -47,7 +108,7 @@ import {SET_WORKOUT_NAME, SET_WORKOUT_AUTHOR, SET_WORKOUT_EXERCISES} from '../co
     }
   }
 
-  export const getWorkoutByID = (id: string) => {
+  export const getWorkoutByIDAPI = (id: string) => {
     //In order to use await your callback must be asynchronous using async keyword.
     return async dispatch => {
       //Then perform your asynchronous operations.
@@ -69,7 +130,7 @@ import {SET_WORKOUT_NAME, SET_WORKOUT_AUTHOR, SET_WORKOUT_EXERCISES} from '../co
     }
   }
 
-  export const addWorkout = (workoutToAdd: WorkoutType) => {
+  export const addWorkoutAPI = (workoutToAdd: WorkoutType) => {
     //In order to use await your callback must be asynchronous using async keyword.
     return async dispatch => {
       //Then perform your asynchronous operations.
@@ -83,7 +144,10 @@ import {SET_WORKOUT_NAME, SET_WORKOUT_AUTHOR, SET_WORKOUT_EXERCISES} from '../co
         });
         //Then use the json method to get json data from api/
         const workoutJson = await workoutPromise.json();
-        dispatch(setAuthor(workoutJson.author), setName(workoutJson.name), setExercises(workoutJson.exercises));
+        dispatch({
+          type: ADD_WORKOUT,
+          payload: workoutJson
+        });
         return workoutPromise.json(); // parses JSON response into native JavaScript objects
       } catch (error) {
         console.log('Error---------', error);
@@ -93,7 +157,7 @@ import {SET_WORKOUT_NAME, SET_WORKOUT_AUTHOR, SET_WORKOUT_EXERCISES} from '../co
     }
   }
 
-  export const updateWorkout = (id: string, workoutToUpdate: WorkoutType) => {
+  export const updateWorkoutAPI = (id: string, workoutToUpdate: WorkoutType) => {
     //In order to use await your callback must be asynchronous using async keyword.
     return async dispatch => {
       //Then perform your asynchronous operations.
@@ -107,7 +171,10 @@ import {SET_WORKOUT_NAME, SET_WORKOUT_AUTHOR, SET_WORKOUT_EXERCISES} from '../co
         });
         //Then use the json method to get json data from api/
         const workoutJson = await workoutPromise.json();
-        dispatch(setAuthor(workoutJson.author), setName(workoutJson.name), setExercises(workoutJson.exercises));
+        dispatch({
+          type: UPDATE_WORKOUT,
+          payload: workoutJson
+        });
         return workoutPromise.json(); // parses JSON response into native JavaScript objects
       } catch (error) {
         console.log('Error---------', error);
@@ -117,7 +184,7 @@ import {SET_WORKOUT_NAME, SET_WORKOUT_AUTHOR, SET_WORKOUT_EXERCISES} from '../co
     }
   }
 
-  export const deleteWorkout = (id: string) => {
+  export const deleteWorkoutAPI = (id: string) => {
     //In order to use await your callback must be asynchronous using async keyword.
     return async dispatch => {
       //Then perform your asynchronous operations.
@@ -130,7 +197,10 @@ import {SET_WORKOUT_NAME, SET_WORKOUT_AUTHOR, SET_WORKOUT_EXERCISES} from '../co
         });
         //Then use the json method to get json data from api/
         const workoutJson = await workoutPromise.json();
-        dispatch(setAuthor(workoutJson.author), setName(workoutJson.name), setExercises(workoutJson.exercises));
+        dispatch({
+          type: DELETE_WORKOUT,
+          payload: workoutJson
+        });
         return workoutPromise.json(); // parses JSON response into native JavaScript objects
       } catch (error) {
         console.log('Error---------', error);
@@ -140,3 +210,5 @@ import {SET_WORKOUT_NAME, SET_WORKOUT_AUTHOR, SET_WORKOUT_EXERCISES} from '../co
     }
   }
 
+
+  // #endregion ACTIONS WITH API

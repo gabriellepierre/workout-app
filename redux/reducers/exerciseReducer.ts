@@ -1,6 +1,16 @@
+import { ExerciseType } from "../../model/workout/ExerciseType";
 import { GET_ALL_EXERCISES, SET_EXERCISES_LIST } from "../constants";
 
+interface ExerciseState {
+  exercise: ExerciseType,
+  exerciseList: ExerciseType[],
+}
+
 const initialState = {
+    exercise: {
+      name: "",
+      musclesEngaged: ""
+    },
     exerciseList: [],
   };
   

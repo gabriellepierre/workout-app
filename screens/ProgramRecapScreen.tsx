@@ -4,12 +4,10 @@ import Layout from '../components/layouts/Layout';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { users } from '../data/UserData';
 import { useSelector, useDispatch } from 'react-redux';
-import { programs } from '../data/ProgramData';
 import { getUsers, setUserProgram } from '../redux/actions/actionUser';
 import {useEffect} from 'react';
-import { getAllPrograms } from '../redux/actions/actionProgram';
+import { getAllPrograms, getProgramByID } from '../redux/actions/actionProgram';
 
 
 export default function ProgramRecapScreen() {
@@ -17,19 +15,19 @@ export default function ProgramRecapScreen() {
 
    // @ts-ignore
    const allPrograms = useSelector(state => state.appReducer.program);
-   console.log(allPrograms);
+   
    const dispatch = useDispatch();
+   
 
   // @ts-ignore
   const route = useRoute<RouteProp<RootStackParamList, 'ProgramRecap'>>();
   const programId = route.params;
 
-  const programDetail = programs.find(p => p._id === programId);
+  const programDetail = allPrograms.allPrograms.find(p => p._id === programId);
 
   // @ts-ignore
-  const {usersList, user} = useSelector(state => state.appReducer.user);
-  console.log(usersList);
-  const numberOfUsers = users.filter(user => user.program === programDetail._id).length;
+  const {usersList} = useSelector(state => state.appReducer.user);
+  const numberOfUsers = usersList?.filter(user => user.program === programDetail._id).length;
 
   useEffect(() => {
     const loadProgram = async () => {
@@ -45,8 +43,8 @@ export default function ProgramRecapScreen() {
     loadUsers();
 
     loadProgram();
-
   }, [dispatch]);
+
 
   function chooseProgram() {
     // Get the user, and add the program to it

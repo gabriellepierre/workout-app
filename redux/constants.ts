@@ -20,14 +20,17 @@ export const GET_ALL_EXERCISES = 'getAllExercises';
 // #endregion Exercises
 
 // #region Workout
-export const GET_ALL_WORKOUT = 'getAllWorkout';
+export const GET_ALL_WORKOUTS = 'getAllWorkouts';
 export const GET_WORKOUT_BY_ID = 'getWorkoutById';
+
 export const ADD_WORKOUT = 'addWorkout';
+
 export const UPDATE_WORKOUT = 'updateWorkout';
 export const DELETE_WORKOUT = 'deleteWorkout';
-export const SET_WORKOUT_NAME = 'setWorkoutName';
-export const SET_WORKOUT_AUTHOR = 'setWorkoutAuthor';
+
 export const SET_WORKOUT_EXERCISES = 'setWorkoutExercises';
+
+export const SET_WORKOUT_ERROR = 'setWorkoutError';
 // #endregion Workout
 
 
@@ -36,8 +39,12 @@ export const SET_PROGRAM_NAME = 'setProgramName';
 export const SET_PROGRAM_LEVEL = 'setProgramLevel';
 export const SET_PROGRAM_OBJECTIVE = 'setProgramObjective';
 
+export const ADD_PROGRAM = 'addProgram';
+
 export const GET_PROGRAM_BY_ID = 'getProgramByID';
 
 export const SET_ALL_PROGRAMS = 'setAllPrograms';
 export const GET_ALL_PROGRAMS = 'getAllPrograms';
+
+export const SET_PROGRAM_ERROR = 'setProgramError';
 // #endregion Workout

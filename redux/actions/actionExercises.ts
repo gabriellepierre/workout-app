@@ -11,7 +11,6 @@ export const setExercisesList = (exercisesList: ExerciseType[]) => {
     };
   }
   
-
 export const getAllExercises = () => {
     //In order to use await your callback must be asynchronous using async keyword.
     return async dispatch => {
