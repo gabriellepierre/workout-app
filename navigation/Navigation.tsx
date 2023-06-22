@@ -2,14 +2,27 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import ConnexionNavigation from "./ConnexionNavigation";
 import BusinessNavigation from "./BusinessNavigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getConnectedUser } from "../redux/actions/actionStorage";
 
 export default function Navigation() {
     const Stack = createStackNavigator();
     const [userAccess, setUserAccess] = useState("Connexion");
+    const dispatch = useDispatch();
 
-    let isConnected = false; //Set to false when user is linked
-    if (isConnected) {
+    // @ts-ignore
+    const { user } = useSelector(state => state.appReducer.storage);
+    
+    useEffect(() => {
+        const loadUser = async () => {
+            // @ts-ignore
+            await getConnectedUser();
+        };
+        loadUser();
+    }, [dispatch]);
+
+    if (user) {
         setUserAccess("Business")
     }
     return (

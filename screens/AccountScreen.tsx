@@ -2,14 +2,40 @@ import { StyleSheet, Text, View } from 'react-native';
 import Title from '../components/shared/Title';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import Layout from '../components/layouts/Layout';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getConnectedUser, removeConnectedUser } from '../redux/actions/actionStorage';
 
 export default function AccountScreen() {
     const title = "Workout";
     const subtitle = "Mon compte";
-    // Todo : replace the raw data with user data
+    
+    // @ts-ignore
+    const storage = useSelector(state => state.appReducer.storage);
+    const user = storage.user;
+    console.log("user dans la page account : ", user);
+
+    // @ts-ignore
+    // const { workoutList } = useSelector(state => state.appReducer.workouts);
+    // const usersWorkout = workoutList?.filter(workout => workout.author === user._id).length;
+
+
+    useEffect(() => {
+        const loadUser = async () => {
+            // @ts-ignore
+            await getConnectedUser();
+        };
+        loadUser();
+    }, [storage]);
 
     function logOut() {
-        //TODO: log out
+        // @ts-ignore
+        const removeUserFromStorage = async () => {
+            // @ts-ignore
+            await removeConnectedUser();
+        };
+        removeUserFromStorage();
+
         console.log("logged out");
     }
     return (
@@ -19,15 +45,17 @@ export default function AccountScreen() {
             <View >
                 <View style={styles.flexed}>
                     <Text style={styles.properties}>Pseudo :</Text>
-                    <Text style={styles.userData}>User pseudo</Text>
+                    <Text style={styles.userData}>{user?.pseudo}</Text>
                 </View>
                 <View style={styles.flexed}>
                     <Text style={styles.properties}>Email :</Text>
-                    <Text style={styles.userData}>user.pseudo@email.com</Text>
+                    <Text style={styles.userData}>{user?.email}</Text>
                 </View>
                 <View style={styles.flexed}>
                     <Text style={styles.properties}>Nombre de séance :</Text>
-                    <Text style={styles.userData}>20</Text>
+                    <Text style={styles.userData}>20
+                        {/* {usersWorkout ? usersWorkout : 0} */}
+                        </Text>
                 </View>
             </View>
             <View style={styles.centered}>

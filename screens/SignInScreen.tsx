@@ -16,7 +16,6 @@ export default function SignInScreen() {
   const [isError, setIsError] = useState(false);
 
   // @ts-ignore
-  // const { user } = useSelector(state => state.appReducer.user);
   const dispatch = useDispatch();
 
   const handleEmail = (e) => {
@@ -39,6 +38,11 @@ export default function SignInScreen() {
     if(userState !== undefined) {
       // @ts-ignore
       dispatch(addUser(userState));
+      const registerUser = async () => {
+        // @ts-ignore
+        await dispatch(storeConnectedUser(userState));
+      };
+      registerUser();
 
       //@ts-ignore
       navigation.navigate("Home");

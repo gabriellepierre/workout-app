@@ -6,19 +6,24 @@ import PrimaryInput from '../components/shared/PrimaryInput';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { UserType } from '../model/user/UserType';
+import { storeConnectedUser } from '../redux/actions/actionStorage';
 
 export default function LogInScreen() {
 
   const navigation = useNavigation();
+
+  const dispatch = useDispatch();
+
   const [userConnexion, setUserConnexion] = useState<UserType>();
   const [isError, setIsError] = useState(false);
 
 
   // @ts-ignore
   const {usersList} = useSelector(state => state.appReducer.user);
-  console.log(usersList);
+  // @ts-ignore
+  const {user} = useSelector(state => state.appReducer.storage);
   console.log(userConnexion);
 
   function emailInput(e) {
@@ -30,14 +35,26 @@ export default function LogInScreen() {
   }
 
   function handleLogIn () {
-    const isRegistered = usersList.filter(user => user.email === userConnexion.email && user.password === userConnexion.password);
-    console.log(isRegistered);
-    if(isRegistered.length > 0) {
-      //@ts-ignore
-      navigation.navigate("Home");
+    if(userConnexion) {
+      const isRegistered = usersList.filter(user => user.email === userConnexion.email && user.password === userConnexion.password);
+      if(isRegistered.length > 0) {
+        // Register user in storage
+        // @ts-ignore
+        const registerUser = async () => {
+          // @ts-ignore
+          await storeConnectedUser(isRegistered[0]);
+        };
+        registerUser();
+        
+        //@ts-ignore
+        navigation.navigate("Home");
+      } else {
+        setIsError(true);
+      }
     } else {
       setIsError(true);
     }
+    
   }
 
   function toSignInScreen() {
