@@ -2,18 +2,17 @@ import { StyleSheet, Text, View } from 'react-native';
 import Title from '../components/shared/Title';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import Layout from '../components/layouts/Layout';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getConnectedUser, removeConnectedUser } from '../redux/actions/actionStorage';
+import { useNavigation } from '@react-navigation/native';
+import { useEffect, useState } from 'react';
+import { clearAllStorage, getConnectedUser, removeConnectedUser } from '../redux/actions/actionStorage';
+import { UserType } from '../model/user/UserType';
 
 export default function AccountScreen() {
     const title = "Workout";
     const subtitle = "Mon compte";
-    
-    // @ts-ignore
-    const storage = useSelector(state => state.appReducer.storage);
-    const user = storage.user;
-    console.log("user dans la page account : ", user);
+
+    const navigation = useNavigation();
+    const [user, setUser] = useState<UserType>();
 
     // @ts-ignore
     // const { workoutList } = useSelector(state => state.appReducer.workouts);
@@ -24,19 +23,23 @@ export default function AccountScreen() {
         const loadUser = async () => {
             // @ts-ignore
             await getConnectedUser();
+            setUser(await getConnectedUser());
         };
         loadUser();
-    }, [storage]);
+
+    }, []);
 
     function logOut() {
-        // @ts-ignore
         const removeUserFromStorage = async () => {
-            // @ts-ignore
             await removeConnectedUser();
+            if(await getConnectedUser() === null) {
+                // @ts-ignore
+                navigation.navigate("Connexion");
+            }
         };
         removeUserFromStorage();
 
-        console.log("logged out");
+        
     }
     return (
         <Layout>

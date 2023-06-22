@@ -26,7 +26,6 @@ export default function ProgramWorkoutsScreen() {
   const navigation = useNavigation();
 
   function ProgramNaming() {
-    console.log();
   }
 
   function postProgram () {

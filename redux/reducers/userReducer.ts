@@ -1,6 +1,6 @@
 import { users } from "../../data/UserData";
 import { UserType } from "../../model/user/UserType";
-import { ADD_USER, GET_USERS, SET_USER_PROGRAM, USER_ERROR } from "../constants";
+import { ADD_USER, GET_USERS, UPDATE_USER, USER_ERROR } from "../constants";
 import uuid from 'react-native-uuid';
 
 interface UserState {
@@ -35,11 +35,15 @@ export const userReducer = (state = initialState, action) : UserState => {
           ...state,
           usersList: [...state.usersList, newUser],
         };
-      case SET_USER_PROGRAM: 
+      case UPDATE_USER: {
+        const { userId, newProperty } = action.payload;
         return {
           ...state,
-          user: {...state.user, program: action.payload},
+          usersList: state.usersList.map((user) =>
+          user._id === userId ? { ...user, ...newProperty } : user
+          ),
         };
+      }
         // ERROR CASE
       case USER_ERROR: 
         return {

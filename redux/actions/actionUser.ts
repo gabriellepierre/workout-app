@@ -1,14 +1,7 @@
 
 import { users } from '../../data/UserData';
 import { UserType } from '../../model/user/UserType';
-import {ADD_USER, SET_USERS, SET_USER_PROGRAM, USER_ERROR} from '../constants';
-
-  export const setUserProgram = (programId: string) => {
-    return {
-      type: SET_USER_PROGRAM,
-      payload: programId,
-    };
-  };
+import {ADD_USER, SET_USERS, UPDATE_USER, USER_ERROR} from '../constants';
 
   export const setUsersList = (usersList: UserType[]) => {
     return {
@@ -62,6 +55,23 @@ export const getUsers = () => {
     };
   };
 
+  export const updateUser = (userId, newProperty) => {
+    return async dispatch => {
+      try {
+        dispatch({
+          type: UPDATE_USER,
+          payload: {
+            userId,
+            newProperty,
+          }
+        });
+      } catch (error) {
+        console.log('Error---------', error);
+        //You can dispatch to another action if you want to display an error message in the application
+        dispatch(setUserError(error));
+      }
+    };
+  };
 
  
   

@@ -1,20 +1,39 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Title from '../components/shared/Title';
 import Layout from '../components/layouts/Layout';
 import PrimaryInput from '../components/shared/PrimaryInput';
 import PrimaryButton from '../components/shared/PrimaryButton';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { UserType } from '../model/user/UserType';
 import { storeConnectedUser } from '../redux/actions/actionStorage';
 
 export default function LogInScreen() {
 
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    const blockGoBack = () => {
+      navigation.addListener('beforeRemove', (e) => {
+        // Vérifier si l'écran est en focus
+        if (isFocused) {
+          // Ignorer la navigation "goBack"
+          e.preventDefault();
+        }
+      });
+    };
+
+    // Ajouter l'écouteur pour bloquer le "goBack" lors du montage de l'écran
+    blockGoBack();
+
+    // Nettoyer l'écouteur lorsque l'écran est démonté
+    return () => {
+      navigation.removeListener('beforeRemove', () => {});
+    };
+  }, [isFocused, navigation]);
 
   const [userConnexion, setUserConnexion] = useState<UserType>();
   const [isError, setIsError] = useState(false);
@@ -22,9 +41,6 @@ export default function LogInScreen() {
 
   // @ts-ignore
   const {usersList} = useSelector(state => state.appReducer.user);
-  // @ts-ignore
-  const {user} = useSelector(state => state.appReducer.storage);
-  console.log(userConnexion);
 
   function emailInput(e) {
     setUserConnexion({...userConnexion, email: e})

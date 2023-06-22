@@ -4,9 +4,9 @@ import SearchButton from '../components/search/SearchButton';
 import Subtitle from '../components/shared/Subtitle';
 import WorkoutCarousel from '../components/workout/WorkoutCarousel';
 import ProgramCard from '../components/program/ProgramCard';
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import PrimaryButton from '../components/shared/PrimaryButton';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import Layout from '../components/layouts/Layout';
 import { workouts } from '../data/WorkoutData';
 
@@ -52,10 +52,6 @@ export default function HomeScreen() {
   // const userProgram = user.program;
   const userProgram = "187651";
 
-  // if (userProgram !== null) {
-  //   setHasProgram(true);  
-  // }
-
   function goToProgram() {
     //@ts-ignore
     navigation.navigate('ProgramRecap', userProgram);
@@ -67,8 +63,29 @@ export default function HomeScreen() {
   function toSearchScreen() {
     //@ts-ignore
     navigation.navigate("Research");
-
   }
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    const blockGoBack = () => {
+      navigation.addListener('beforeRemove', (e) => {
+        // Vérifier si l'écran est en focus
+        if (isFocused) {
+          // Ignorer la navigation "goBack"
+          e.preventDefault();
+        }
+      });
+    };
+
+    // Ajouter l'écouteur pour bloquer le "goBack" lors du montage de l'écran
+    blockGoBack();
+
+    // Nettoyer l'écouteur lorsque l'écran est démonté
+    return () => {
+      navigation.removeListener('beforeRemove', () => {});
+    };
+  }, [isFocused, navigation]);
 
   return (
     <Layout>

@@ -2,9 +2,12 @@ export const CLEAR_ALL_STORAGE = 'clearAllStorage';
 
 // #region User
 export const ADD_USER = 'addUser';
-export const SET_USER_PROGRAM = 'setUserProgram';
+
+export const UPDATE_USER = 'updateUser';
+
 export const GET_USERS = 'getUsers';
 export const SET_USERS = 'setUsers';
+
 export const USER_ERROR = 'userError';
 // #endregion User
 
