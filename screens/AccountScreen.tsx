@@ -4,8 +4,9 @@ import PrimaryButton from '../components/shared/PrimaryButton';
 import Layout from '../components/layouts/Layout';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { clearAllStorage, getConnectedUser, removeConnectedUser } from '../redux/actions/actionStorage';
+import { getConnectedUser, removeConnectedUser } from '../redux/actions/actionStorage';
 import { UserType } from '../model/user/UserType';
+import { useSelector } from 'react-redux';
 
 export default function AccountScreen() {
     const title = "Workout";
@@ -13,10 +14,12 @@ export default function AccountScreen() {
 
     const navigation = useNavigation();
     const [user, setUser] = useState<UserType>();
-
+    
     // @ts-ignore
-    // const { workoutList } = useSelector(state => state.appReducer.workouts);
-    // const usersWorkout = workoutList?.filter(workout => workout.author === user._id).length;
+    const workoutStore = useSelector(state => state.appReducer.workout);
+    const workouts = workoutStore.workoutList;
+
+    const usersWorkout = workouts.filter(workout => workout.author === user?.email).length;
 
 
     useEffect(() => {
@@ -56,8 +59,8 @@ export default function AccountScreen() {
                 </View>
                 <View style={styles.flexed}>
                     <Text style={styles.properties}>Nombre de séance :</Text>
-                    <Text style={styles.userData}>20
-                        {/* {usersWorkout ? usersWorkout : 0} */}
+                    <Text style={styles.userData}>
+                        {usersWorkout ? usersWorkout : 0}
                         </Text>
                 </View>
             </View>

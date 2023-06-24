@@ -8,8 +8,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import FilterModal from '../components/search/FilterModal';
 import { useNavigation } from '@react-navigation/native';
 import ProgramSearched from '../components/search/ProgramSearched';
-import { programs } from '../data/ProgramData';
 import { ProgramType } from '../model/program/ProgramType';
+import { useSelector } from 'react-redux';
 
 export default function SearchScreen() {
     const title = "Workout";
@@ -17,11 +17,23 @@ export default function SearchScreen() {
     // Todo : replace the raw data with user data
 
     const navigation = useNavigation();
+    const [searchTerm, setSearchTerm] = useState("");
 
+      // @ts-ignore
+    const programStore = useSelector(state => state.appReducer.program);
+
+    const [programsFiltered, setProgramsFiltered] = useState(programStore.allPrograms);
+    
     const handleSearch = (searchText: string) => {
-        console.log('Recherche effectuée:', searchText);
-        //TODO: Logique de recherche à implémenter ici
+        setSearchTerm(searchText);
 
+        if(searchTerm !== '') {
+          const filteredPrograms = programStore.filter((p) =>
+          p.name.toLowerCase().includes(searchTerm.toLowerCase()));
+          setProgramsFiltered(filteredPrograms);
+        }
+        
+        // setProgramsFiltered
       };
 
       const [openFilter, setOpenFilter] = useState(false);
@@ -41,7 +53,9 @@ export default function SearchScreen() {
         // @ts-ignore
         navigation.navigate('ProgramRecap', item);
       };
-    
+
+
+
     return (
       <Layout>
         <View style={styles.container}>
@@ -61,7 +75,7 @@ export default function SearchScreen() {
           }
 
         <FlatList
-          data={programs}
+          data={programsFiltered}
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item._id}
           renderItem={({ item  } : {item: ProgramType}) => (

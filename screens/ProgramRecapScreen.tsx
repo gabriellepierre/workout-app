@@ -8,8 +8,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUsers, updateUser } from '../redux/actions/actionUser';
 import {useEffect} from 'react';
-import { getAllPrograms, getProgramByID } from '../redux/actions/actionProgram';
-import { getConnectedUser } from '../redux/actions/actionStorage';
+import { getAllPrograms } from '../redux/actions/actionProgram';
+import { getConnectedUser, storeConnectedUser } from '../redux/actions/actionStorage';
 import { UserType } from '../model/user/UserType';
 
 
@@ -17,13 +17,7 @@ export default function ProgramRecapScreen() {
   const navigation = useNavigation();
 
   const [user, setUser] = useState<UserType>();
-
-  const loadUsers = async () => {
-    // @ts-ignore
-      await dispatch(getUsers());
-    };
-    
-  loadUsers();
+  const [userUpdated, setUserUpdated] = useState<UserType>();
    // @ts-ignore
    const allPrograms = useSelector(state => state.appReducer.program);
    
@@ -47,6 +41,12 @@ export default function ProgramRecapScreen() {
       await dispatch(getAllPrograms());
     };
 
+    const loadUsers = async () => {
+      // @ts-ignore
+        await dispatch(getUsers());
+      };
+      
+    loadUsers();
    
     const loadUser = async () => {
       setUser(await getConnectedUser());
@@ -55,13 +55,13 @@ export default function ProgramRecapScreen() {
     loadUser();
 
     loadProgram();
-  }, [dispatch]);
-
+  }, [dispatch, user]);
 
   function chooseProgram() {
     // Get the user, and add the program to it
     // @ts-ignore
     dispatch(updateUser(user._id, {program: programId}));
+
     //@ts-ignore
     navigation.navigate("HomeScreen");
   }

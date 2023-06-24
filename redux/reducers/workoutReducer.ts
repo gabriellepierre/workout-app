@@ -50,6 +50,7 @@ export const workoutReducer = (state = initialState, action): WorkoutState => {
       const newWorkout: WorkoutType = {
         ...action.payload,
         _id: uuid.v4(),
+        createdAt: new Date().getTime(),
       };
       return {
         ...state,

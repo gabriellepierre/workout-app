@@ -1,23 +1,22 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle, View } from 'react-native';
+import { ProgramType } from '../../model/program/ProgramType';
 
 interface ProgramCardProps {
   onPress: () => void;
-  title: string;
-  objective: string;
-  workoutName: string;
+  program: ProgramType;
 }
 
-const ProgramCard: React.FC<ProgramCardProps> = ({ onPress, title, objective, workoutName}) => {
+const ProgramCard: React.FC<ProgramCardProps> = ({ onPress, program}) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
         <View style={[styles.flexed, styles.between]}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.objective}>- {objective}</Text>
+            <Text style={styles.title}>{program.name}</Text>
+            <Text style={styles.objective}>- {program.objective}</Text>
         </View>
          <View style={styles.flexed}>
-            <Text style={styles.workoutTitle}>Séance du jour : </Text>
-            <Text style={styles.workoutName}>{workoutName}</Text>
+            <Text style={styles.workoutTitle}>Niveau : </Text>
+            <Text style={styles.workoutName}>{program.level}</Text>
          </View>
     </TouchableOpacity>
   );
@@ -55,6 +54,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "white",
     fontWeight: "bold",
+    textTransform: "capitalize"
   },
   objective: {
     fontSize: 10,

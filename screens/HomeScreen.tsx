@@ -4,11 +4,13 @@ import SearchButton from '../components/search/SearchButton';
 import Subtitle from '../components/shared/Subtitle';
 import WorkoutCarousel from '../components/workout/WorkoutCarousel';
 import ProgramCard from '../components/program/ProgramCard';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import Layout from '../components/layouts/Layout';
-import { workouts } from '../data/WorkoutData';
+import { getConnectedUser } from '../redux/actions/actionStorage';
+import { UserType } from '../model/user/UserType';
+import { useSelector } from 'react-redux';
 
 export default function HomeScreen() {
   const title = "Workout";
@@ -16,58 +18,17 @@ export default function HomeScreen() {
 
   const navigation = useNavigation();
 
-  // TODO : const user ; avec le user logué
-
-
-  // #region Workouts
-  const myWorkouts= "Mes séances";
-
-  //TODO : add workout data in userWorkouts
-  // const userWorkouts = workouts?.filter(e => e.author === user.email);
-  const [hasWorkouts, setHasWorkouts] = useState(false);
-
-  const userWorkouts = [];
-
-  if (userWorkouts.length > 0) {
-    setHasWorkouts(true);
-  }
-
-  function createWorkout() {
-    //@ts-ignore
-    navigation.navigate("Workout");
-    // navigation.navigate("Program");
-  }
-
-  function goToWorkout() {
-    // TODO: navigate to workout recap
-  }
-
-  // #endregion Workouts
-
-
-
-  // #region Program
-  const myProgram= "Reprendre le programme";
-  const [hasProgram, setHasProgram] = useState(true); // default to false when linked to db
-  // const userProgram = user.program;
-  const userProgram = "187651";
-
-  function goToProgram() {
-    //@ts-ignore
-    navigation.navigate('ProgramRecap', userProgram);
-
-    // TODO: navigate to program
-  }
-  // #endregion Program
-
-  function toSearchScreen() {
-    //@ts-ignore
-    navigation.navigate("Research");
-  }
+  const [user, setUser] = useState<UserType>();
 
   const isFocused = useIsFocused();
 
+  
   useEffect(() => {
+    const loadUser = async () => {
+        setUser(await getConnectedUser());
+    }
+    loadUser();
+
     const blockGoBack = () => {
       navigation.addListener('beforeRemove', (e) => {
         // Vérifier si l'écran est en focus
@@ -86,6 +47,49 @@ export default function HomeScreen() {
       navigation.removeListener('beforeRemove', () => {});
     };
   }, [isFocused, navigation]);
+  
+  // #region Workouts
+  const myWorkouts= "Mes séances";
+
+  // @ts-ignore
+  const workoutStore = useSelector(state => state.appReducer.workout);
+  const workouts = workoutStore.workoutList;
+
+  const userWorkouts = workouts?.filter(e => e.author === user?.email);
+
+  function createWorkout() {
+    //@ts-ignore
+    navigation.navigate("Workout", true);
+  }
+
+  function goToWorkout() {
+    // TODO: navigate to workout recap
+  }
+  // #endregion Workouts
+
+  // #region Program
+  const myProgram= "Reprendre le programme";
+  // @ts-ignore
+  const userStore = useSelector(state => state.appReducer.user);
+
+  const storedUser = userStore.usersList.find(u => u._id = user?._id);
+  const userProgramId = storedUser?.program;
+
+  // @ts-ignore
+  const programStore = useSelector(state => state.appReducer.program);
+  const userProgram = programStore.allPrograms.find(program => program._id === userProgramId);
+
+
+  function goToProgram() {
+    //@ts-ignore
+    navigation.navigate('ProgramRecap', userProgramId);
+  }
+  // #endregion Program
+
+  function toSearchScreen() {
+    //@ts-ignore
+    navigation.navigate("Research");
+  }
 
   return (
     <Layout>
@@ -95,10 +99,9 @@ export default function HomeScreen() {
         <View>
           <View style={styles.flexed}>
             <Subtitle text={myWorkouts}/>
-            <SearchButton toSearchScreen={toSearchScreen}/>
           </View>
-          {hasWorkouts ? (
-            <WorkoutCarousel carouselData={workouts.filter(e => e.author === "gabrielle.pierre19@gmail.com")} />)
+          {userWorkouts?.length !== 0 ? (
+            <WorkoutCarousel carouselData={userWorkouts} />)
             : (
               <View style={styles.noWorkoutArea}>
                 <Text> Vous n'avez pas encore fait de séance.</Text>
@@ -116,8 +119,8 @@ export default function HomeScreen() {
             <Subtitle text={myProgram}/>
             <SearchButton toSearchScreen={toSearchScreen} />
           </View>
-          {hasProgram ? (
-            <ProgramCard onPress={goToProgram} title='Nom du programme' objective='Perte de poids' workoutName='Haut du corps' />)
+          {userProgram ? (
+            <ProgramCard onPress={goToProgram} program={userProgram} />)
             : (
               <View style={styles.noWorkoutArea}>
                 <PrimaryButton onPress={toSearchScreen} title='Commencer un programme' style={styles.buttonAdd} />
