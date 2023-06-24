@@ -1,5 +1,6 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import { ExerciseType } from '../../model/workout/ExerciseType';
 
@@ -11,17 +12,34 @@ interface ExerciseProps {
 const Exercise: React.FC<ExerciseProps> = ({exercise, style}) => {
   const titleStyle = [styles.title];
   const bodyPartStyle = [styles.bodyPart];
+  var barbellColor = "white";
 
   if(!style) {
     //@ts-ignore
     titleStyle.push({ color: "#364d53" });
     //@ts-ignore
     bodyPartStyle.push({ color: "#364d53" });
+    barbellColor = "#364d53";
   }
+
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setIsImageLoaded(true);
+  };
 
   return (
     <View style={styles.justifiedContent}>
-        {exercise.image}
+      {!isImageLoaded &&
+        <View style={styles.image}>
+         <Ionicons name="barbell-outline" size={55} color={barbellColor} />
+        </View>
+      }
+        <Image
+          style={styles.image}
+          source={{uri: exercise.image}}
+          onLoad={handleImageLoad}
+        /> 
 
         <View>
             <Text style={titleStyle} numberOfLines={1}>{exercise.name}</Text>
@@ -42,6 +60,12 @@ const styles = StyleSheet.create({
   justifiedContent: {
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  image: {
+    width: 75,
+    height: 75,
+    margin: -10,
+    marginRight: 5
   },
   bodyPart: {
     fontSize: 15,
