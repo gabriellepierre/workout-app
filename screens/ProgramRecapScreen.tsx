@@ -1,3 +1,4 @@
+import {useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Title from '../components/shared/Title';
 import Layout from '../components/layouts/Layout';
@@ -5,14 +6,24 @@ import PrimaryButton from '../components/shared/PrimaryButton';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUsers, setUserProgram } from '../redux/actions/actionUser';
+import { getUsers, updateUser } from '../redux/actions/actionUser';
 import {useEffect} from 'react';
 import { getAllPrograms, getProgramByID } from '../redux/actions/actionProgram';
+import { getConnectedUser } from '../redux/actions/actionStorage';
+import { UserType } from '../model/user/UserType';
 
 
 export default function ProgramRecapScreen() {
   const navigation = useNavigation();
 
+  const [user, setUser] = useState<UserType>();
+
+  const loadUsers = async () => {
+    // @ts-ignore
+      await dispatch(getUsers());
+    };
+    
+  loadUsers();
    // @ts-ignore
    const allPrograms = useSelector(state => state.appReducer.program);
    
@@ -24,9 +35,10 @@ export default function ProgramRecapScreen() {
   const programId = route.params;
 
   const programDetail = allPrograms.allPrograms.find(p => p._id === programId);
-
+  
   // @ts-ignore
   const {usersList} = useSelector(state => state.appReducer.user);
+  
   const numberOfUsers = usersList?.filter(user => user.program === programDetail._id).length;
 
   useEffect(() => {
@@ -35,12 +47,12 @@ export default function ProgramRecapScreen() {
       await dispatch(getAllPrograms());
     };
 
-    const loadUsers = async () => {
-      // @ts-ignore
-        await dispatch(getUsers());
-      };
-      
-    loadUsers();
+   
+    const loadUser = async () => {
+      setUser(await getConnectedUser());
+    };
+
+    loadUser();
 
     loadProgram();
   }, [dispatch]);
@@ -48,7 +60,8 @@ export default function ProgramRecapScreen() {
 
   function chooseProgram() {
     // Get the user, and add the program to it
-    dispatch(setUserProgram(programId));
+    // @ts-ignore
+    dispatch(updateUser(user._id, {program: programId}));
     //@ts-ignore
     navigation.navigate("HomeScreen");
   }
