@@ -54,10 +54,9 @@ export default function LogInScreen() {
     if(userConnexion) {
       const isRegistered = usersList.filter(user => user.email === userConnexion.email && user.password === userConnexion.password);
       if(isRegistered.length > 0) {
+        // NOTATION : Store favorite data into phone storage
         // Register user in storage
-        // @ts-ignore
         const registerUser = async () => {
-          // @ts-ignore
           await storeConnectedUser(isRegistered[0]);
         };
         registerUser();

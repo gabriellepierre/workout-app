@@ -3,8 +3,7 @@ import Title from '../components/shared/Title';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import Layout from '../components/layouts/Layout';
 import { useNavigation } from '@react-navigation/native';
-import { getConnectedUser, removeConnectedUser } from '../hooks/asyncStorage/actionStorage';
-import { UserType } from '../model/user/UserType';
+import { clearAllStorage, getConnectedUser } from '../hooks/asyncStorage/actionStorage';
 import { useSelector } from 'react-redux';
 import { useCurrentUser } from '../hooks/useCurrentUser';
 
@@ -26,7 +25,7 @@ export default function AccountScreen() {
 
     function logOut() {
         const removeUserFromStorage = async () => {
-            await removeConnectedUser();
+            await clearAllStorage();
             if(await getConnectedUser() === null) {
                 // @ts-ignore
                 navigation.navigate("Connexion");

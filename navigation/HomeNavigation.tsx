@@ -5,6 +5,7 @@ import WorkoutNavigation from './WorkoutNavigation';
 import ProgramRecapScreen from '../screens/ProgramRecapScreen';
 import ProgramCreationScreen from '../screens/ProgramCreationScreen';
 import ProgramNavigation from './ProgramNavigation';
+import WorkoutRecapScreen from '../screens/WorkoutRecapScreen';
 
 export default function HomeNavigation() {
   const Stack = createStackNavigator();
@@ -16,6 +17,7 @@ export default function HomeNavigation() {
         <Stack.Screen name="ProgramRecap" component={ProgramRecapScreen}/>
         <Stack.Screen name="Program" component={ProgramNavigation}/>
         <Stack.Screen name="Workout" component={WorkoutNavigation}/>
+        <Stack.Screen name="WorkoutRecap" component={WorkoutRecapScreen}/>
       </Stack.Navigator>
   )
 }

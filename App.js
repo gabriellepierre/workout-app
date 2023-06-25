@@ -22,8 +22,10 @@ export default function App() {
   }, []);
 
   return (
+    // NOTATION : Redux Store
     <Provider store={store}>
       <View style={styles.container}>
+        {/* NOTATION : Navigation  */}
         <NavigationContainer>
           <Navigation userAccess={userAccess} />
         </NavigationContainer>

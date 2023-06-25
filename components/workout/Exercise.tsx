@@ -31,9 +31,7 @@ const Exercise: React.FC<ExerciseProps> = ({exercise, style}) => {
   return (
     <View style={styles.justifiedContent}>
       {!isImageLoaded &&
-        <View style={styles.image}>
-         <Ionicons name="barbell-outline" size={55} color={barbellColor} />
-        </View>
+         <Ionicons name="barbell-outline" size={50} color={barbellColor} style={{marginRight: -50}} />
       }
         <Image
           style={styles.image}

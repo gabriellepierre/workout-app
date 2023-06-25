@@ -10,9 +10,9 @@ const setsWorkout: SetType[] = [
 ];
 
 const exercicesWorkout: ExerciseType[] = [
-    { _id:"234", name: "Développé couché", musclesEngaged: "Pectoraux", sets: setsWorkout },
-    { _id:"2345674", name: "Squat", musclesEngaged: "Jambes", sets: setsWorkout },
-    { _id:"20987634", name: "Hip trust", musclesEngaged: "Fessiers", sets: setsWorkout },
+  { _id: "156789", image:"https://www.docteur-fitness.com/wp-content/uploads/2019/08/developpe-couche.gif", name: 'Développé couché', musclesEngaged: 'Pectoraux' },
+  { _id: "23456789", image: "https://www.docteur-fitness.com/wp-content/uploads/2021/12/souleve-de-terre.gif", name: 'Soulevé de terre', musclesEngaged: 'Bas du corps' },
+  { _id: "398665864658", image: "https://www.docteur-fitness.com/wp-content/uploads/2021/11/homme-faisant-un-squat-avec-barre.gif", name: 'Squat', musclesEngaged: 'Bas du corps' },
   ];
 
 export const workouts: WorkoutType[] = [

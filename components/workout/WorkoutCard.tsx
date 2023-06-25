@@ -2,17 +2,20 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 interface WorkoutCardProps {
-  onPress: () => void;
+  onPress: (id) => void;
   title: string;
   date: string;
+  id: string;
 }
 
-const WorkoutCard: React.FC<WorkoutCardProps> = ({ onPress, title, date }) => {
+const WorkoutCard: React.FC<WorkoutCardProps> = ({ onPress, title, date, id }) => {
 
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
+    <TouchableOpacity style={styles.card} onPress={() => onPress(id)}>
       <Text style={[styles.title] } numberOfLines={1}>{title}</Text>
-      <Text style={styles.date}>Du {date}</Text>
+      {date && 
+        <Text style={styles.date}>Du {date}</Text>
+      }
     </TouchableOpacity>
   );
 };

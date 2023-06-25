@@ -2,13 +2,18 @@ import React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import WorkoutCard from './WorkoutCard';
 import { WorkoutType } from '../../model/workout/WorkoutType';
+import { useNavigation } from '@react-navigation/native';
 
- const WorkoutCarousel = (
+
+const WorkoutCarousel = (
   {carouselData}: {carouselData: WorkoutType[]}
   ) => {
-    function goToWorkout() {
-        // TODO: navigate to workout recap
-      }
+    const navigation = useNavigation();
+
+    function goToWorkout(id: string) {
+      //@ts-ignore
+      navigation.navigate('WorkoutRecap', id);
+    }
       
     return (
       <View>
@@ -19,7 +24,7 @@ import { WorkoutType } from '../../model/workout/WorkoutType';
           keyExtractor={(item) => item._id}
           renderItem={({ item }) => (
             <View style={styles.item}>
-                <WorkoutCard onPress={goToWorkout} date={item.createdAt} title={item.name} />
+                <WorkoutCard onPress={goToWorkout} date={item.createdAt} title={item.name} id={item._id} />
               {/* TODO Affichez le contenu de chaque élément ici */}
             </View>
           )}

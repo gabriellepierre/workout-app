@@ -18,12 +18,9 @@ export default function HomeScreen() {
   const subtitle = "Suit tes progrès";
 
   const navigation = useNavigation();
-
   const user = useCurrentUser();
-
   const isFocused = useIsFocused();
 
-  
   useEffect(() => {
 
     const blockGoBack = () => {
@@ -56,11 +53,7 @@ export default function HomeScreen() {
 
   function createWorkout() {
     //@ts-ignore
-    navigation.navigate("Workout", true);
-  }
-
-  function goToWorkout() {
-    // TODO: navigate to workout recap
+    navigation.navigate("Workout", user.email);
   }
   // #endregion Workouts
 
@@ -114,6 +107,7 @@ export default function HomeScreen() {
         <View>
           <View style={styles.flexed}>
             <Subtitle text={myProgram}/>
+            {/* NOTATION : Navigation , at least one button */}
             <SearchButton toSearchScreen={toSearchScreen} />
           </View>
           {userProgram ? (

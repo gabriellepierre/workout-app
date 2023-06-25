@@ -6,7 +6,7 @@ import uuid from 'react-native-uuid';
 interface UserState {
   user: UserType,
   usersList: UserType[];
-  error: any;
+  error: Error;
 }
 
 const initialState: UserState = {
@@ -44,7 +44,7 @@ export const userReducer = (state = initialState, action) : UserState => {
           ),
         };
       }
-        // ERROR CASE
+      // ERROR CASE
       case USER_ERROR: 
         return {
           ...state,

@@ -24,8 +24,6 @@ export const getUsers = () => {
     try {
       dispatch(setUsersList(users));
     } catch (error) {
-      console.log('Error with exercise API ---------', error);
-      //You can dispatch to another action if you want to display an error message in the application
       dispatch(setUserError(error));
     }
   }
@@ -34,19 +32,15 @@ export const getUsers = () => {
   export const addUser = (user: UserType) => {
     return async dispatch => {
       try {
-        // const userPromise = await fetch(url, {
-        //   method: "POST",
-        //   headers: {
-        //     "Accept": "application/json",
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify(user),
-        // });
-        // const userJson = await userPromise.json();
-        dispatch({
-          type: ADD_USER,
-          payload: user,
-        });
+        if(user !== undefined) {
+
+          dispatch({
+            type: ADD_USER,
+            payload: user,
+          });
+        } else {
+          throw new Error("User's props aren't set properly");
+        }
       } catch (error) {
         console.log('Error---------', error);
         //You can dispatch to another action if you want to display an error message in the application

@@ -21,6 +21,7 @@ export default function Layout({children, dark, style}: LayoutProps) {
 
 
     return (
+    // NOTATION : Handle a TextInput correctly
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={layoutStyle}>
         {dark ? 

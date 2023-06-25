@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
+import { useCurrentUser } from '../../hooks/useCurrentUser';
 
 
 interface PlusButtonProps {
@@ -20,10 +21,11 @@ const PlusButton: React.FC<PlusButtonProps> = ({ onPress, color, style }) => {
   }
 
   const navigation = useNavigation();
+  const user = useCurrentUser();
 
   if(!onPress) {
     //@ts-ignore
-    onPress = () => navigation.navigate("Workout");
+    onPress = () => navigation.navigate("Workout", user.email);
   }
 
   return (

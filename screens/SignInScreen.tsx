@@ -6,7 +6,7 @@ import PrimaryInput from '../components/shared/PrimaryInput';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addUser } from '../redux/actions/actionUser';
 import { UserType } from '../model/user/UserType';
 

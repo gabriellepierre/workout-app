@@ -7,6 +7,7 @@ import WorkoutNavigation from "./WorkoutNavigation";
 import PlusButton from "../components/shared/PlusButton";
 
 export default function BottomBarNavigation() {
+    {/* NOTATION : Navigation ; Tab bottom navigation  */}
     const BottomTabNavigator = createBottomTabNavigator();
     return (
         <BottomTabNavigator.Navigator initialRouteName="Home">

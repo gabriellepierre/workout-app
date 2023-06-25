@@ -1,27 +1,20 @@
 import Title from '../components/shared/Title';
 import Layout from '../components/layouts/Layout';
 import PrimaryButton from '../components/shared/PrimaryButton';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { View, FlatList, StyleSheet } from 'react-native';
 import PlusButton from '../components/shared/PlusButton';
 import SetsCard from '../components/workout/SetsCard';
-import { exercises } from '../data/ExercisesData';
-
-
-const data = [
-  { id: 1, title: 'Développé couché', bodyPart: 'Pectoraux' },
-  { id: 2, title: 'Soulevé de terre', bodyPart: 'Bas du corps' },
-  { id: 3, title: 'Squat', bodyPart: 'Bas du corps' },
-  { id: 4, title: 'Hip trust', bodyPart: 'Fessiers' },
-  // TODO Ajoutez les autres éléments de votre carrousel
-];
 
 export default function WorkoutBuilderScreen() {
-
-    const workoutName = "Séance n° X";
-
   const navigation = useNavigation();
+
+  // @ts-ignore
+  const route = useRoute<RouteProp<RootStackParamList, 'Builder'>>();
+  const workoutName = route.params.workoutName;
+  const exercises = route.params.exercises;
+
 
   function patchWorkout () {
     // TODO: POST workout and register name
