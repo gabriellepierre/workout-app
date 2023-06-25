@@ -23,13 +23,11 @@ export default function SignInScreen() {
   };
 
   const handlePseudo = (e) => {
-    // TODO: register pseudo
     setUserState({...userState, pseudo: e});
 
   }
 
   const handlePassword= (e) => {
-    // TODO: register pwd
     setUserState({...userState, password: e});
   }
 

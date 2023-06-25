@@ -25,7 +25,6 @@ const WorkoutCarousel = (
           renderItem={({ item }) => (
             <View style={styles.item}>
                 <WorkoutCard onPress={goToWorkout} date={item.createdAt} title={item.name} id={item._id} />
-              {/* TODO Affichez le contenu de chaque élément ici */}
             </View>
           )}
         />

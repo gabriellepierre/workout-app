@@ -12,11 +12,7 @@ import { PROGRAM_LEVEL } from '../model/program/Level';
 
 export default function ProgramWorkoutsScreen() {
 
-  // TODO remplacer program par le vrai programme
   const programNumber = programs.length;
-  const [programName, setProgramName] = useState("");
-  const [programLevel, setProgramLevel] = useState("");
-  const [programObjective, setProgramObjective] = useState("");
 
   const ProgramName = "Programme n°" + programNumber;
 
@@ -29,7 +25,6 @@ export default function ProgramWorkoutsScreen() {
   }
 
   function postProgram () {
-    // TODO: POST Program and register name
     //@ts-ignore
     navigation.navigate("Exercices");
   }

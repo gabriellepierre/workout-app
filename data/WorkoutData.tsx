@@ -22,7 +22,6 @@ export const workouts: WorkoutType[] = [
     { _id: "51", author:"hectortest@gmail.com", name:"leg day", exercises: exercicesWorkout },
     { _id: "61", name:"jeudi" },
     { _id: "71", name:"test" },
-    // // TODO Ajoutez les autres éléments de votre carrousel
   ];
 
   

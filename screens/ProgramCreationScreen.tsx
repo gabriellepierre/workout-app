@@ -13,7 +13,6 @@ import { PROGRAM_LEVEL } from '../model/program/Level';
 export default function ProgramCreationScreen() {
 
 
-  // TODO remplacer program par le vrai programme
   const programNumber = programs.length;
   const [programName, setProgramName] = useState("");
   const [programLevel, setProgramLevel] = useState("");
@@ -27,7 +26,6 @@ export default function ProgramCreationScreen() {
   const navigation = useNavigation();
 
   function postProgram () {
-    // TODO: POST Program and register name
     
     //@ts-ignore
     navigation.navigate("Builder");

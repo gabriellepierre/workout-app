@@ -15,7 +15,6 @@ import { useSearch } from '../hooks/useSearch';
 export default function SearchScreen() {
     const title = "Workout";
     const subtitle = "Rechercher un programme";
-    // Todo : replace the raw data with user data
 
     const navigation = useNavigation();
     const [searchTerm, setSearchTerm] = useState("");
@@ -44,7 +43,6 @@ export default function SearchScreen() {
       }
       
       // const createProgram = () => {
-      //   //TODO: navigate to program creation page
       //   // @ts-ignore
       //   navigation.navigate("Program");
       // }
@@ -119,7 +117,7 @@ export default function SearchScreen() {
     searchHeader: {
         flexDirection: "row",
         width: "100%",
-        // TODO : faire en sorte que la section prenne la largeur de l'écran
+        // la section prend pas encore toute la largeur de l'écran
     },
     
 

@@ -17,7 +17,6 @@ export default function WorkoutBuilderScreen() {
 
 
   function patchWorkout () {
-    // TODO: POST workout and register name
     //@ts-ignore
     navigation.navigate("Builder");
   }
