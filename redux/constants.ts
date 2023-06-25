@@ -16,6 +16,7 @@ export const SET_EXERCISES_LIST = 'setExercisesList';
 export const GET_ALL_EXERCISES = 'getAllExercises';
 
 export const FETCH_ERROR_CALLBACK = 'fetchErrorCallback';
+export const FETCH_LOADING_CALLBACK = 'fetchLoadingCallback';
 export const FETCH_SUCCESS_CALLBACK = 'fetchSuccessCallback';
 // #endregion Exercises
 

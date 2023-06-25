@@ -18,6 +18,12 @@ export const setExercisesList = (exercisesList: ExerciseType[]) => {
     };
   }
 
+  export const fetchLoadingCallback = () => {
+    return {
+      type: FETCH_ERROR_CALLBACK,
+    };
+  }
+
   export const fetchSuccessCallback = (exercisesList: ExerciseType[]) => {
     return {
       type: FETCH_SUCCESS_CALLBACK,
@@ -28,6 +34,7 @@ export const setExercisesList = (exercisesList: ExerciseType[]) => {
   const fetchData = () => {   
     fetch('https://example-data.draftbit.com/books?_limit=10')
       .then((response) => {
+        fetchLoadingCallback();
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
