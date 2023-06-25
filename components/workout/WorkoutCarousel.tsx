@@ -4,7 +4,6 @@ import WorkoutCard from './WorkoutCard';
 import { WorkoutType } from '../../model/workout/WorkoutType';
 import { useNavigation } from '@react-navigation/native';
 
-
 const WorkoutCarousel = (
   {carouselData}: {carouselData: WorkoutType[]}
   ) => {
@@ -17,6 +16,7 @@ const WorkoutCarousel = (
       
     return (
       <View>
+        {/* NOTATION : Display list of items */}
         <FlatList
           data={carouselData}
           horizontal

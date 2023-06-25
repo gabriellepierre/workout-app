@@ -49,7 +49,8 @@ export default function HomeScreen() {
   const workoutStore = useSelector(state => state.appReducer.workout);
   const workouts = workoutStore.workoutList;
 
-  const userWorkouts = workouts?.filter(e => e.author === user?.email);
+  const userWorkouts = workouts?.filter(e => e?.author === user?.email);
+  console.log(userWorkouts);
 
   function createWorkout() {
     //@ts-ignore
@@ -91,7 +92,7 @@ export default function HomeScreen() {
             <Subtitle text={myWorkouts}/>
           </View>
           {userWorkouts?.length !== 0 ? (
-            <WorkoutCarousel carouselData={userWorkouts} />)
+            <WorkoutCarousel carouselData={userWorkouts?.reverse()} />)
             : (
               <View style={styles.noWorkoutArea}>
                 <Text> Vous n'avez pas encore fait de séance.</Text>

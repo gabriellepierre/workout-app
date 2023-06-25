@@ -40,7 +40,6 @@ Pour l'instant, les workouts sont composés d'une liste d'exercices à réaliser
 
 Il s'agit des programmes. Ceux ci sont accessibles seulement en lecture, et nous n'avons pas encore mis la possibilité de faire les séances du programme au sein de l'application. Mais ces changements seront disponibles dans une 2ème version de l'application (à venir, stay tuned).
 Dans cette 2ème version, les utilisateurs auront des rôles. Le rôle de "coach" permettra la création et l'édition de programme.
-Nous avons d'ores et déjà mis en place un système d'ajout d'auteur aux séances : c'est-à-dire que nous passons à la page de création de workout un auteur ou non. S'il y en a un, alors il s'agit d'une simple séance réalisée par un utilisateur. S'il n'y a pas d'auteur, alors il s'agit d'une séance de programme (Polymorphic pattern en DB).
 
 ---
 

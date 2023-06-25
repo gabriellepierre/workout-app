@@ -3,7 +3,6 @@ import HomeScreen from "../screens/HomeScreen";
 import SearchScreen from "../screens/SearchScreen";
 import WorkoutNavigation from './WorkoutNavigation';
 import ProgramRecapScreen from '../screens/ProgramRecapScreen';
-import ProgramCreationScreen from '../screens/ProgramCreationScreen';
 import ProgramNavigation from './ProgramNavigation';
 import WorkoutRecapScreen from '../screens/WorkoutRecapScreen';
 

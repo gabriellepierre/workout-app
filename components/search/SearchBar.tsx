@@ -23,8 +23,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         style={styles.searchInput}
         placeholder="RECHERCHER"
         placeholderTextColor="grey"
-        onChangeText={handleSearch}
-        onSubmitEditing={handleSearch}
+        onChangeText={setSearchText}
+        onEndEditing={handleSearch}
       />
     </View>
   );

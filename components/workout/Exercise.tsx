@@ -30,9 +30,11 @@ const Exercise: React.FC<ExerciseProps> = ({exercise, style}) => {
 
   return (
     <View style={styles.justifiedContent}>
+
       {!isImageLoaded &&
          <Ionicons name="barbell-outline" size={50} color={barbellColor} style={{marginRight: -50}} />
       }
+      {/* NOTATION : Display dynamic image */}
         <Image
           style={styles.image}
           source={{uri: exercise.image}}

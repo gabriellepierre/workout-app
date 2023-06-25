@@ -8,6 +8,7 @@ import { PROGRAM_OBJECTIVE } from '../../model/program/Objective';
 interface FilterModalProps {
   visible: boolean;
   onClose: () => void;
+  // NOTATION : Binding child component props
   onModalData: ({}) => void;
 }
 
@@ -18,6 +19,7 @@ const FilterModal: React.FC<FilterModalProps> = ({ visible, onClose, onModalData
   const modalData = { objective: selectedOption1, level: selectedOption2 };
 
   const handleApplyFilters = () => {
+    // NOTATION : Binding child component props
     onModalData(modalData);
 
     setSelectedOption1(null);

@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import ProgramSearched from '../components/search/ProgramSearched';
 import { ProgramType } from '../model/program/ProgramType';
 import { useSelector } from 'react-redux';
+import { useSearch } from '../hooks/useSearch';
 
 export default function SearchScreen() {
     const title = "Workout";
@@ -22,39 +23,23 @@ export default function SearchScreen() {
       // @ts-ignore
     const programStore = useSelector(state => state.appReducer.program);
 
-    const [programsFiltered, setProgramsFiltered] = useState(programStore.allPrograms);
+    var searchedPrograms = useSearch(searchTerm, programStore?.allPrograms);
+
+    const [programs, setPrograms] = useState(null);
+
+    const [openFilter, setOpenFilter] = useState(false);
     
-    const handleSearch = (searchText: string) => {
-      setSearchTerm(searchText);
-
-      // console.log(searchText.toUpperCase());
-      // const updatedData = programStore.allPrograms.filter((item) => item.name.toUpperCase().indexOf(searchText.toUpperCase()) > -1);
-      // console.log(updatedData);
-    
-
-        if(searchTerm !== '') {
-          const filteredPrograms =  programStore.allPrograms.filter((item) => item.name.toUpperCase().indexOf(searchText.toUpperCase()) > -1);
-          setProgramsFiltered(filteredPrograms);
-        }
-        
-        // setProgramsFiltered
-      };
-
-      const [openFilter, setOpenFilter] = useState(false);
-
+    // NOTATION : Binding child component props
       const handleFilter = (filters) => {
 
-        if (filters.objective) {
-          setProgramsFiltered(programsFiltered.filter(p => p.objective === filters.objective));
-        }
-        if (filters.level === null) {
-          setProgramsFiltered(programStore.allPrograms);
-        }
-
-        if (filters.level) {
-          setProgramsFiltered(programsFiltered.filter(p => p.level === filters.level));
-        } else if (filters.objective === null) {
-          setProgramsFiltered(programStore.allPrograms);
+        if (filters.objective && !filters.level) {
+          setPrograms(searchedPrograms.filter(p => p.objective === filters.objective));
+        } else if (filters.level && !filters.objective) {
+          setPrograms(searchedPrograms.filter(p => p.level === filters.level));
+        } else if (filters.level && filters.objective) {
+          setPrograms(searchedPrograms.filter(p => p.level === filters.level && p.objective === filters.objective));
+        } else {
+          setPrograms(null);
         }
       }
       
@@ -64,10 +49,10 @@ export default function SearchScreen() {
       //   navigation.navigate("Program");
       // }
 
-      const gotToProgram = (item: string) => {
-        // @ts-ignore
-        navigation.navigate('ProgramRecap', item);
-      };
+    const gotToProgram = (item: string) => {
+      // @ts-ignore
+      navigation.navigate('ProgramRecap', item);
+    };
 
 
 
@@ -79,29 +64,29 @@ export default function SearchScreen() {
 
           <View style={styles.searchHeader}>
             <View style={styles.flexed}>
-              <SearchBar onSearch={handleSearch}/>
+              <SearchBar onSearch={setSearchTerm}/>
             </View>
             <View style={styles.flexed}>
               <PrimaryButton title="Filtrer" onPress={() => setOpenFilter(true)} icon={<FontAwesome size={15} name={"filter"} color="white" style={{marginHorizontal: 5}} />}/>
             </View>
           </View>
           {openFilter && 
+          // NOTATION : Binding child component props
             <FilterModal visible={openFilter} onModalData={handleFilter} onClose={() => setOpenFilter(false)}/>
           }
-        {programsFiltered?.length > 0 ? 
+        {searchedPrograms?.length > 0 || programs?.length > 0 ? 
           <FlatList
-            data={programsFiltered}
+            data={programs ? programs : searchedPrograms}
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item) => item._id}
             renderItem={({ item  } : {item: ProgramType}) => (
-              
-              <TouchableOpacity onPress={() => gotToProgram(item._id)}>
+              <TouchableOpacity onPress={() => gotToProgram(item?._id)}>
                 <ProgramSearched program={item} />
               </TouchableOpacity>
             )}
           />
         : 
-        <Text>Aucun résultat ne correspond à la recherche</Text>
+          <Text>Aucun résultat ne correspond à la recherche</Text>
         }
         
           
