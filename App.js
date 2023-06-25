@@ -4,7 +4,7 @@ import Navigation from "./navigation/Navigation";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import { useEffect, useState } from "react";
-import { getConnectedUser } from "./redux/actions/actionStorage";
+import { getConnectedUser } from "./hooks/asyncStorage/actionStorage";
 
 export default function App() {
   const [userAccess, setUserAccess] = useState(false);

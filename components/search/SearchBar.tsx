@@ -9,7 +9,8 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [searchText, setSearchText] = useState('');
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    setSearchText(e);
     onSearch(searchText);
   };
 
@@ -22,7 +23,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         style={styles.searchInput}
         placeholder="RECHERCHER"
         placeholderTextColor="grey"
-        onChangeText={setSearchText}
+        onChangeText={handleSearch}
         onSubmitEditing={handleSearch}
       />
     </View>

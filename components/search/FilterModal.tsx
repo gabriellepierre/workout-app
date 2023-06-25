@@ -8,18 +8,22 @@ import { PROGRAM_OBJECTIVE } from '../../model/program/Objective';
 interface FilterModalProps {
   visible: boolean;
   onClose: () => void;
+  onModalData: ({}) => void;
 }
 
-const FilterModal: React.FC<FilterModalProps> = ({ visible, onClose }) => {
+const FilterModal: React.FC<FilterModalProps> = ({ visible, onClose, onModalData }) => {
   const [selectedOption1, setSelectedOption1] = useState(null);
   const [selectedOption2, setSelectedOption2] = useState(null);
 
-  const handleApplyFilters = () => {
-    // Gérer l'application des filtres ici
-    console.log('Option 1 sélectionnée :', selectedOption1);
-    console.log('Option 2 sélectionnée :', selectedOption2);
+  const modalData = { objective: selectedOption1, level: selectedOption2 };
 
-    onClose(); // Fermer la modal après avoir appliqué les filtres
+  const handleApplyFilters = () => {
+    onModalData(modalData);
+
+    setSelectedOption1(null);
+    setSelectedOption2(null);
+    
+    onClose();
   };
 
   const objectives = PROGRAM_OBJECTIVE;

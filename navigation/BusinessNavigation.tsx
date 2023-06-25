@@ -3,8 +3,6 @@ import WorkoutNavigation from './WorkoutNavigation';
 import BottomBarNavigation from './BottomBarNavigation';
 import ProgramNavigation from './ProgramNavigation';
 import ConnexionNavigation from './ConnexionNavigation';
-import { useEffect, useState } from 'react';
-import { getConnectedUser } from '../redux/actions/actionStorage';
 
 export default function BusinessNavigation() {
   const Stack = createStackNavigator();

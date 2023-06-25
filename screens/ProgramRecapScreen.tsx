@@ -9,20 +9,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUsers, updateUser } from '../redux/actions/actionUser';
 import {useEffect} from 'react';
 import { getAllPrograms } from '../redux/actions/actionProgram';
-import { getConnectedUser, storeConnectedUser } from '../redux/actions/actionStorage';
-import { UserType } from '../model/user/UserType';
+import { useCurrentUser } from '../hooks/useCurrentUser';
 
 
 export default function ProgramRecapScreen() {
   const navigation = useNavigation();
+  const user = useCurrentUser();
+  const dispatch = useDispatch();
 
-  const [user, setUser] = useState<UserType>();
-  const [userUpdated, setUserUpdated] = useState<UserType>();
    // @ts-ignore
    const allPrograms = useSelector(state => state.appReducer.program);
-   
-   const dispatch = useDispatch();
-   
 
   // @ts-ignore
   const route = useRoute<RouteProp<RootStackParamList, 'ProgramRecap'>>();
@@ -47,12 +43,6 @@ export default function ProgramRecapScreen() {
       };
       
     loadUsers();
-   
-    const loadUser = async () => {
-      setUser(await getConnectedUser());
-    };
-
-    loadUser();
 
     loadProgram();
   }, [dispatch, user]);

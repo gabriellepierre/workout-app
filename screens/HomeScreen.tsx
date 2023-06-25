@@ -8,9 +8,10 @@ import { useState, useEffect } from 'react';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import Layout from '../components/layouts/Layout';
-import { getConnectedUser } from '../redux/actions/actionStorage';
+import { getConnectedUser } from '../hooks/asyncStorage/actionStorage';
 import { UserType } from '../model/user/UserType';
 import { useSelector } from 'react-redux';
+import { useCurrentUser } from '../hooks/useCurrentUser';
 
 export default function HomeScreen() {
   const title = "Workout";
@@ -18,16 +19,12 @@ export default function HomeScreen() {
 
   const navigation = useNavigation();
 
-  const [user, setUser] = useState<UserType>();
+  const user = useCurrentUser();
 
   const isFocused = useIsFocused();
 
   
   useEffect(() => {
-    const loadUser = async () => {
-        setUser(await getConnectedUser());
-    }
-    loadUser();
 
     const blockGoBack = () => {
       navigation.addListener('beforeRemove', (e) => {

@@ -25,11 +25,15 @@ export default function SearchScreen() {
     const [programsFiltered, setProgramsFiltered] = useState(programStore.allPrograms);
     
     const handleSearch = (searchText: string) => {
-        setSearchTerm(searchText);
+      setSearchTerm(searchText);
+
+      // console.log(searchText.toUpperCase());
+      // const updatedData = programStore.allPrograms.filter((item) => item.name.toUpperCase().indexOf(searchText.toUpperCase()) > -1);
+      // console.log(updatedData);
+    
 
         if(searchTerm !== '') {
-          const filteredPrograms = programStore.filter((p) =>
-          p.name.toLowerCase().includes(searchTerm.toLowerCase()));
+          const filteredPrograms =  programStore.allPrograms.filter((item) => item.name.toUpperCase().indexOf(searchText.toUpperCase()) > -1);
           setProgramsFiltered(filteredPrograms);
         }
         
@@ -38,16 +42,27 @@ export default function SearchScreen() {
 
       const [openFilter, setOpenFilter] = useState(false);
 
-      const handleFilter = () => {
-        setOpenFilter(true);
-        //TODO: Logique de filtre ici
+      const handleFilter = (filters) => {
+
+        if (filters.objective) {
+          setProgramsFiltered(programsFiltered.filter(p => p.objective === filters.objective));
+        }
+        if (filters.level === null) {
+          setProgramsFiltered(programStore.allPrograms);
+        }
+
+        if (filters.level) {
+          setProgramsFiltered(programsFiltered.filter(p => p.level === filters.level));
+        } else if (filters.objective === null) {
+          setProgramsFiltered(programStore.allPrograms);
+        }
       }
       
-      const createProgram = () => {
-        //TODO: navigate to program creation page
-        // @ts-ignore
-        navigation.navigate("Program");
-      }
+      // const createProgram = () => {
+      //   //TODO: navigate to program creation page
+      //   // @ts-ignore
+      //   navigation.navigate("Program");
+      // }
 
       const gotToProgram = (item: string) => {
         // @ts-ignore
@@ -67,31 +82,35 @@ export default function SearchScreen() {
               <SearchBar onSearch={handleSearch}/>
             </View>
             <View style={styles.flexed}>
-              <PrimaryButton title="Filtrer" onPress={handleFilter} icon={<FontAwesome size={15} name={"filter"} color="white" style={{marginHorizontal: 5}} />}/>
+              <PrimaryButton title="Filtrer" onPress={() => setOpenFilter(true)} icon={<FontAwesome size={15} name={"filter"} color="white" style={{marginHorizontal: 5}} />}/>
             </View>
           </View>
           {openFilter && 
-            <FilterModal visible={openFilter} onClose={() => setOpenFilter(false)}/>
+            <FilterModal visible={openFilter} onModalData={handleFilter} onClose={() => setOpenFilter(false)}/>
           }
-
-        <FlatList
-          data={programsFiltered}
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item._id}
-          renderItem={({ item  } : {item: ProgramType}) => (
-            
-            <TouchableOpacity onPress={() => gotToProgram(item._id)}>
-              <ProgramSearched program={item} />
-            </TouchableOpacity>
-          )}
-        />
+        {programsFiltered?.length > 0 ? 
+          <FlatList
+            data={programsFiltered}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item) => item._id}
+            renderItem={({ item  } : {item: ProgramType}) => (
+              
+              <TouchableOpacity onPress={() => gotToProgram(item._id)}>
+                <ProgramSearched program={item} />
+              </TouchableOpacity>
+            )}
+          />
+        : 
+        <Text>Aucun résultat ne correspond à la recherche</Text>
+        }
+        
           
 
-          <View style={styles.centered}>
+          {/* <View style={styles.centered}>
             <View>
               <PrimaryButton title="Créer un programme" onPress={createProgram} />
             </View>
-          </View>
+          </View> */}
 
         </View>
       </Layout>

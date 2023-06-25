@@ -3,34 +3,26 @@ import Title from '../components/shared/Title';
 import PrimaryButton from '../components/shared/PrimaryButton';
 import Layout from '../components/layouts/Layout';
 import { useNavigation } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
-import { getConnectedUser, removeConnectedUser } from '../redux/actions/actionStorage';
+import { getConnectedUser, removeConnectedUser } from '../hooks/asyncStorage/actionStorage';
 import { UserType } from '../model/user/UserType';
 import { useSelector } from 'react-redux';
+import { useCurrentUser } from '../hooks/useCurrentUser';
 
 export default function AccountScreen() {
     const title = "Workout";
     const subtitle = "Mon compte";
 
     const navigation = useNavigation();
-    const [user, setUser] = useState<UserType>();
     
     // @ts-ignore
     const workoutStore = useSelector(state => state.appReducer.workout);
     const workouts = workoutStore.workoutList;
 
+    const user = useCurrentUser();
+
     const usersWorkout = workouts.filter(workout => workout.author === user?.email).length;
 
 
-    useEffect(() => {
-        const loadUser = async () => {
-            // @ts-ignore
-            await getConnectedUser();
-            setUser(await getConnectedUser());
-        };
-        loadUser();
-
-    }, []);
 
     function logOut() {
         const removeUserFromStorage = async () => {
@@ -41,7 +33,6 @@ export default function AccountScreen() {
             }
         };
         removeUserFromStorage();
-
         
     }
     return (

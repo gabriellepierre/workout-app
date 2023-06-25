@@ -11,12 +11,6 @@ export const SET_USERS = 'setUsers';
 export const USER_ERROR = 'userError';
 // #endregion User
 
-// #region async storage for user
-export const STORE_CONNECTED_USER = 'storeConnectedUser';
-export const GET_CONNECTED_USER = 'getConnectedUser';
-export const REMOVE_CONNECTED_USER = 'removeConnectedUser';
-// #endregion async storage for user
-
 // #region Exercises
 export const SET_EXERCISES_LIST = 'setExercisesList';
 export const GET_ALL_EXERCISES = 'getAllExercises';

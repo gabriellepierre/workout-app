@@ -8,7 +8,7 @@ import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
 import { UserType } from '../model/user/UserType';
-import { storeConnectedUser } from '../redux/actions/actionStorage';
+import { storeConnectedUser } from '../hooks/asyncStorage/actionStorage';
 
 export default function LogInScreen() {
 
