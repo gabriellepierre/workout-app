@@ -42,9 +42,9 @@ const Exercise: React.FC<ExerciseProps> = ({exercise, style}) => {
         /> 
 
         <View>
-            <Text style={titleStyle} numberOfLines={1}>{exercise.name}</Text>
+            <Text testID="exercise-name" style={titleStyle} numberOfLines={1}>{exercise.name}</Text>
 
-            <Text style={bodyPartStyle} numberOfLines={1}>{exercise.musclesEngaged}</Text>
+            <Text testID="exercise-musclesEngaged" style={bodyPartStyle} numberOfLines={1}>{exercise.musclesEngaged}</Text>
         </View>
     </View>
     );
