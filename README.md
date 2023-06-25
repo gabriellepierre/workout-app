@@ -4,7 +4,7 @@
 
 #### Où trouver les points réalisés ?
 
-Nous avons mis des commentaire <code>NOTATION</code> là où se trouvent certains points. Ils ne sont pas tous répertoriés (surtout pour le redux store, qui est utilisé dans la quasi-totalité de l'application) mais nous avons essayé d'en mettre au moins un par point.
+Nous avons mis des commentaire <code>NOTATION</code> là où se trouvent les points. Ils ne sont pas tous répertoriés (surtout pour le redux store, qui est utilisé dans la quasi-totalité de l'application) mais nous avons essayé d'en mettre au moins un par point.
 
 > NOTATION : Sexy UI everywhere !
 
